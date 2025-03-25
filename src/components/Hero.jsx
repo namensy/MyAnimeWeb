@@ -19,21 +19,26 @@ const Hero = () => {
               className="mt-[150px] ml-[50px] w-[450px] "
             />
           </div>
-          <div className="max-w-md ml-15">
+          <div className="max-w-xl ml-15">
             <p className="text-sm text-[#9b9ba0] my-2">
-              16+ • Sub | Dub • Action, Adventure, Fantasy
+              <span className="text-white inline-block px-[5px] bg-[#34373e] -skew-x-12">16+</span> • Sub | Dub • Action, Adventure, Fantasy
             </p>
-            <p className="text-sm text-white">
+            <p className="text-base text-white text-justify">
               They say whatever doesn’t kill you makes you stronger, but that’s
               not the case for the world’s weakest hunter Sung Jinwoo. After being
               brutally slaughtered by monsters in a high-ranking dungeon, Jinwoo
               came back with the System, a program only he could see, that’s
               leveling him up in every way. Now, he’s...
             </p>
-            <button className="text-sm cursor-pointer py-1 px-2 flex items-center gap-3 mt-5 bg-[#ff640a] font-bold tracking-wide hover:bg-[#ff7b2e] transition-all">
+            <button className="text-[16px] cursor-pointer py-1 px-2 flex items-center gap-3 mt-8 bg-[#ff640a] font-bold tracking-wide hover:bg-[#ff7b2e] transition-all">
               <img className="w-4" src={assets.caret_right} alt="caret right" />
               START WATCHING
             </button>
+            <div className="flex gap-2 h-[80px] items-end">
+              <button className="w-8 h-2 cursor-pointer bg-[#9b9ba0] hover:bg-[#b34607] rounded-sm"></button>
+              <button className="w-8 h-2 cursor-pointer bg-[#9b9ba0] hover:bg-[#b34607] rounded-sm"></button>
+              <button className="w-8 h-2 cursor-pointer bg-[#9b9ba0] hover:bg-[#b34607] rounded-sm"></button>
+            </div>
           </div>
         </div>
       </div>
