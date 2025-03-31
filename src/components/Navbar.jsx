@@ -9,7 +9,7 @@ const Navbar = () => {
   const { user } = useUser()
   
   return (
-    <div className='flex items-center justify-between'>
+    <div className='flex items-center justify-between bg-black sticky top-0 z-10'>
       <div className='flex gap-2'>
         <div className='hover:text-white cursor-pointerbg-white'>
           <img className='w-30 cursor-pointer hover:-translate-y-0.5 transition-transform' src={assets.crunchyroll} alt="Crunchyroll logo" />

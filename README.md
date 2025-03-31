@@ -1,12 +1,34 @@
-# React + Vite
+# Crunchyroll Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application that replicates the popular anime streaming platform Crunchyroll, built with React and Vite. This project showcases modern web development practices and responsive design.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Clean and intuitive user interface matching Crunchyroll's design
+- Navigation bar with search functionality
+- User authentication system using Clerk
+- Responsive layout built with Tailwind CSS
+- Fast development environment powered by Vite
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React for building the user interface
+- Vite as the build tool and development server
+- Tailwind CSS for styling
+- Clerk for user authentication
+- Modern JavaScript (ES6+)
+
+## Getting Started
+
+1. Clone this repository
+2. Install dependencies with `npm install`
+3. Start the development server with `npm run dev`
+4. Open your browser to the local development URL
+
+## Project Structure
+
+The application follows a component-based architecture with key features like:
+- Navbar component for navigation and search
+- Authentication integration
+- Responsive design elements
+- Asset management system
