@@ -1,20 +1,20 @@
 import React from "react";
 import { assets } from "../assets/assets";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Hero = () => {
   const [imageIndex, setImageIndex] = useState(1);
-  
-  const getBackgroundImage = () => {
-    if (imageIndex === 1) return `${assets.solo}`
-    if (imageIndex === 2) return `${assets.rezero}`
-    return `${assets.cote}`
-  }
 
+  const getBackgroundImage = () => {
+    if (imageIndex === 1) return `${assets.solo}`;
+    if (imageIndex === 2) return `${assets.rezero}`;
+    return `${assets.cote}`;
+  };
 
   return (
-    <div style={{ backgroundImage : `url('${getBackgroundImage()}')`}} className={`h-[1200px] flex justify-center items-center scale-[1] transition-all ease duration-300 bg-center bg-cover bg-no-repeat`}
+    <div
+      style={{ backgroundImage: `url('${getBackgroundImage()}')` }}
+      className={`h-[1200px] flex justify-center items-center scale-[1] transition-all ease duration-400 bg-center bg-cover bg-no-repeat`}
     >
       <div className=" w-full h-full text-9xl  bg-gradient-to-r from-black to-transparent ">
         <div className="container max-w-11/12 mx-auto">
@@ -23,7 +23,13 @@ const Hero = () => {
               <img src={assets.qwerty} alt="Sololeveling text" />
             ) : imageIndex === 2 ? (
               <img src={assets.retext} alt="Rezero text" />
-            ) : <img className=" inline-block mt-30" src={assets.cote_text} alt="Cote text"/>}
+            ) : (
+              <img
+                className=" inline-block mt-30"
+                src={assets.cote_text}
+                alt="Cote text"
+              />
+            )}
           </div>
           <div className="max-w-xl ">
             <p className="text-sm text-[#9b9ba0] my-2">
@@ -36,25 +42,26 @@ const Hero = () => {
               {imageIndex === 1 ? (
                 <p className="text-base text-white text-justify">
                   They say whatever doesn’t kill you makes you stronger, but
-                  that’s not the case for the world’s weakest hunter Sung Jinwoo.
-                  After being brutally slaughtered by monsters in a high-ranking
-                  dungeon, Jinwoo came back with the System, a program only he
-                  could see, that’s leveling him up in every way. Now, he’s...
+                  that’s not the case for the world’s weakest hunter Sung
+                  Jinwoo. After being brutally slaughtered by monsters in a
+                  high-ranking dungeon, Jinwoo came back with the System, a
+                  program only he could see, that’s leveling him up in every
+                  way. Now, he’s...
                 </p>
               ) : imageIndex === 2 ? (
                 <p className="text-base text-white text-justify">
                   Natsuki Subaru, an ordinary high school student, is on his way
                   home from the convenience store when he finds himself
-                  transported to another world. As he's lost and confused in a new
-                  world where he doesn't even know left from right, the only
+                  transported to another world. As he's lost and confused in a
+                  new world where he doesn't even know left from right, the only
                   person to reach out to him was a beautiful girl with silver
                   hair.
                 </p>
               ) : (
                 <p className="text-base text-white text-justify">
                   Kiyotaka Ayanokoji has just enrolled at Tokyo Koudo Ikusei
-                  Senior High School, where it's said that 100% of students go on
-                  to college or find employment. But he ends up in Class 1-D,
+                  Senior High School, where it's said that 100% of students go
+                  on to college or find employment. But he ends up in Class 1-D,
                   which is full of all the school's problem children.
                 </p>
               )}
@@ -70,15 +77,21 @@ const Hero = () => {
             <div className="flex gap-2 h-[80px] items-end">
               <button
                 onClick={() => setImageIndex(1)}
-                className={`btn-style transition-all duration-300  ${imageIndex === 1 ? 'bg-orange-400 w-12' : ''}`}
+                className={`btn-style transition-all duration-400  ${
+                  imageIndex === 1 ? "bg-orange-400 w-12" : ""
+                }`}
               ></button>
               <button
                 onClick={() => setImageIndex(2)}
-                className={`btn-style transition-all duration-300  ${imageIndex === 2 ? 'bg-orange-400 w-12' : ''}`}
+                className={`btn-style transition-all duration-400  ${
+                  imageIndex === 2 ? "bg-orange-400 w-12" : ""
+                }`}
               ></button>
               <button
                 onClick={() => setImageIndex(3)}
-                className={`btn-style transition-all duration-300  ${imageIndex === 3 ? 'bg-orange-400 w-12' : ''}`}
+                className={`btn-style transition-all duration-400  ${
+                  imageIndex === 3 ? "bg-orange-400 w-12" : ""
+                }`}
               ></button>
               {/* {useEffect(() => {
                 const interval = setInterval(() => {
