@@ -11,6 +11,18 @@ const Hero = () => {
     return `${assets.cote}`;
   };
 
+  const numbers = [1, 2, 3];
+  numbers.forEach(function processNumber(num) {
+    console.log(num);
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndex((prev) => (prev === 3 ? 1 : prev + 1));
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div
       style={{ backgroundImage: `url('${getBackgroundImage()}')` }}
@@ -93,12 +105,6 @@ const Hero = () => {
                   imageIndex === 3 ? "bg-orange-400 w-12" : ""
                 }`}
               ></button>
-              {/* {useEffect(() => {
-                const interval = setInterval(() => {
-                  setImageIndex(prev => prev === 3 ? 1 : prev + 1);
-                }, 5000);
-                return () => clearInterval(interval);
-              }, [])} */}
             </div>
           </div>
         </div>
