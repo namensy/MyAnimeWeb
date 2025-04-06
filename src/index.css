@@ -1,14 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "tailwindcss";
+
 
 @layer base {
   * {
     font-family: Outfit, sans-serif;
   }
+  
+    /* ซ่อน scrollbar แนวนอน */
+    ::-webkit-scrollbar {
+      width: 10px;    /* scrollbar แนวตั้ง */
+      height: 0;      /* scrollbar แนวนอน */
+    }
+    /* ปรับแต่ง track (พื้นหลัง) */
+    ::-webkit-scrollbar-track {
+      background: black;
+    }
+    /* ปรับแต่ง thumb (ตัวเลื่อน) */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 5px;
+      min-height: 40px;
+      margin: 2px;
+      background-clip: content-box;
+      border: 3px solid transparent
+    }  
 }
 
 @layer components {
   .btn-style {
     @apply w-6 h-2 cursor-pointer bg-[#9b9ba0] hover:bg-[#b34607] rounded-sm;
+  }
+}
+
+@layer utilities {
+  .double-gradient {
+    background: linear-gradient(to right, black, transparent),
+                linear-gradient(to top, black, transparent);
+    background-blend-mode: multiply;
   }
 }

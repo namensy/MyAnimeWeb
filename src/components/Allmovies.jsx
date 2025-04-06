@@ -1,27 +1,36 @@
 import React from "react";
 import axios from "axios";
+import uniqid from 'uniqid';
+import { useDebounce } from "use-debounce";
 import { useEffect } from "react";
 import { useState } from "react";
 import { assets } from "../assets/assets";
 
-const Allmovies = () => {
+
+const Allmovies = ({ setSearchTerm, searchTerm }) => {
   const [animeList, setAnimeList] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [debouncedText] = useDebounce(searchTerm, 300);
 
   const getMovieApi = async () => {
     try {
-      const response = await axios.get("https://api.jikan.moe/v4/anime");
+      const response = await axios.get(
+        debouncedText 
+        ? `https://api.jikan.moe/v4/anime?q=${searchTerm}`
+        : 'https://api.jikan.moe/v4/top/anime'
+        );
       const {data: {data}} = response
-      setAnimeList(data)
+      setAnimeList(data)      
     } catch (error) {
       // alert('Error fetching the anime data')
-      console.log('Error =>', error);
+      console.log('Error', error);
     }
   };
 
   const handleRightClick = () => {
-    if (currentIndex + 6 < animeList.length) {
-      setCurrentIndex(currentIndex + 6)
+    const maxIndex = Math.max(0, animeList.length - 7);
+    if (currentIndex < maxIndex) {
+      setCurrentIndex(Math.min(currentIndex + 6, maxIndex));
     }
   }
 
@@ -35,28 +44,35 @@ const Allmovies = () => {
 
   useEffect(() => {
     getMovieApi();
-  }, [])
+  }, [debouncedText])
 
   return (
-    <div>
-      <div className={`absolute left-2 bottom-32 w-12 cursor-pointer ${currentIndex == 0 ? 'hidden' : ''}`} onClick={handleLeftClick}><img src={assets.back} alt="Back arrow" /></div>
-      <div className={`absolute right-2 bottom-32 w-12 cursor-pointer ${currentIndex == 24 ? 'hidden' : ''}`} onClick={handleRightClick}><img src={assets.next} alt="Right arrow" /></div>
-      <div className="container max-w-11/12 mx-auto -mt-[400px] absolute left-20 overflow-hidden  ">
+    <section >
+      <div className={`absolute left-0 bottom-0 w-12 cursor-pointer z-10 py-37.5 px-3 bg-gradient-to-r from-[#0000002c] from-70% to-transparent ${currentIndex === 0 ? 'hidden' : ''}`} onClick={handleLeftClick}>
+        <img src={assets.back} alt="Back arrow" />
+      </div>
+      <div className={`absolute right-0 bottom-0 w-12 cursor-pointer z-10 py-37.5 px-3 bg-gradient-to-r from-[#0000002c] from-70% to-transparent ${currentIndex === 18 ? 'hidden' : ''}`} onClick={handleRightClick}>
+        <img src={assets.next} alt="Right arrow" />
+      </div>
+      <div className="container max-w-11/12 mx-auto -mt-[400px] absolute left-20">
         <h1 className=" text-3xl font-bold tracking-wide">Anime Watchlist</h1>
         <p className="text-[#9d9d9d]">Unwind this weekend with your top anime picks</p>
-        <div className="w-full text-center whitespace-nowrap ">
-          {animeList && animeList.slice(currentIndex, currentIndex + 6).map((items) => (
-            <div key={items.mal_id} className="py-4 rounded-sm inline-block space-x-9 transition-all duration-300 ease-in ">
-              <div>
-                <img src={items.images.jpg.image_url} alt="image" className="block mx-auto w-[260px] h-[325px] rounded-sm" />
+        <div className="">
+          <div className="w-full text-center whitespace-nowrap transition-transform duration-1000 ease-in-out " style={{ transform: `translateX(-${currentIndex * (100/6)}%)`}} >
+            {animeList && animeList.map((items) => (
+              <div key={`${items.mal_id}${uniqid()}`} className="py-4 rounded-sm inline-block mr-6 transition-all duration-300 ease-in ">
+                <div className="w-[260px] h-[325px] ">
+                  <img src={items.images.jpg.image_url} alt="image" className="block w-full h-full mx-auto rounded-sm" />
+                  </div>
+                <p className="line-clamp-1 w-[260px] text-black whitespace-normal">
+                {items.title}
+                  </p>
                 </div>
-              <p>
-              {items.title}
-                </p></div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

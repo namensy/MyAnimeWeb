@@ -5,12 +5,13 @@ import Allmovies from './components/Allmovies'
 
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState([])
 
   return (
     <div className=' text-white relative'>
-      <Navbar />
+      <Navbar setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>
       <Hero />
-      <Allmovies />
+      <Allmovies setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>
     </div>
   )
 }

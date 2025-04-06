@@ -11,10 +11,6 @@ const Hero = () => {
     return `${assets.cote}`;
   };
 
-  const numbers = [1, 2, 3];
-  numbers.forEach(function processNumber(num) {
-    console.log(num);
-  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,17 +20,17 @@ const Hero = () => {
   }, []);
 
   return (
-    <div
+    <main
       style={{ backgroundImage: `url('${getBackgroundImage()}')` }}
       className={`h-[1200px] flex justify-center items-center scale-[1] transition-all ease duration-400 bg-center bg-cover bg-no-repeat`}
     >
-      <div className=" w-full h-full text-9xl  bg-gradient-to-r from-black to-transparent ">
+      <div className=" w-full h-full text-9xl double-gradient">
         <div className="container max-w-11/12 mx-auto">
           <div className="w-[400px] h-[250px] mt-[150px] ">
             {imageIndex === 1 ? (
               <img src={assets.qwerty} alt="Sololeveling text" />
             ) : imageIndex === 2 ? (
-              <img src={assets.retext} alt="Rezero text" />
+              <img src={assets.retext} className="inline-block mt-10" alt="Rezero text" />
             ) : (
               <img
                 className=" inline-block mt-30"
@@ -109,7 +105,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

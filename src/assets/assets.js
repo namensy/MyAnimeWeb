@@ -9,6 +9,7 @@ import back from './back.png';
 import next from './next.png';
 import cote from './cote.jpg'
 import cote_text from './cote_text.svg'
+import gamer from './gamer.png'
 
 export const assets = {
   crunchyroll,
@@ -22,4 +23,5 @@ export const assets = {
   next,
   cote,
   cote_text,
+  gamer,
 };
