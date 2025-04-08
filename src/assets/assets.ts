@@ -11,7 +11,23 @@ import cote from './cote.jpg'
 import cote_text from './cote_text.svg'
 import gamer from './gamer.png'
 
-export const assets = {
+
+interface Assets {
+  crunchyroll: string
+  search_icon: string
+  solo: string
+  qwerty: string
+  caret_right: string
+  rezero: string
+  retext: string
+  back: string
+  next: string
+  cote: string
+  cote_text: string
+  gamer: string
+}
+
+export const assets: Assets = {
   crunchyroll,
   search_icon,
   solo,

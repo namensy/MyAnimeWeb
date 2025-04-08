@@ -4,7 +4,7 @@ import Hero from './components/Hero'
 import Allmovies from './components/Allmovies'
 
 
-function App() {
+const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState([])
 
   return (

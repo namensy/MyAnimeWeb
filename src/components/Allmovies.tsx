@@ -14,12 +14,12 @@ const Allmovies = ({ setSearchTerm, searchTerm }) => {
 
   const getMovieApi = async () => {
     try {
-      const response = await axios.get(
+      const endpoint = await axios.get(
         debouncedText 
-        ? `https://api.jikan.moe/v4/anime?q=${searchTerm}`
+        ? `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(searchTerm)}`
         : 'https://api.jikan.moe/v4/top/anime'
         );
-      const {data: {data}} = response
+      const {data: {data}} = endpoint
       setAnimeList(data)      
     } catch (error) {
       // alert('Error fetching the anime data')
