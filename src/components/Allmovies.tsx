@@ -1,16 +1,29 @@
-import React from "react";
 import axios from "axios";
-import uniqid from 'uniqid';
+import { v4 as uuid } from 'uuid';
 import { useDebounce } from "use-debounce";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { assets } from "../assets/assets";
 
+interface AnimeItems  {
+  mal_id: boolean
+  images: {
+    jpg: {
+      image_url: string
+    }
+  }
+  title: string
+}
 
-const Allmovies = ({ setSearchTerm, searchTerm }) => {
-  const [animeList, setAnimeList] = useState([])
+interface AllmoviesProps {
+  searchTerm: string;
+  setSearchTerm: Dispatch<SetStateAction<string>>;
+}
+
+const Allmovies = ({ setSearchTerm, searchTerm }: AllmoviesProps) => {
+  const [animeList, setAnimeList] = useState<AnimeItems[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [debouncedText] = useDebounce(searchTerm, 300);
+
 
   const getMovieApi = async () => {
     try {
@@ -58,9 +71,9 @@ const Allmovies = ({ setSearchTerm, searchTerm }) => {
         <h1 className=" text-3xl font-bold tracking-wide">Anime Watchlist</h1>
         <p className="text-[#9d9d9d]">Unwind this weekend with your top anime picks</p>
         <div className="">
-          <div className="w-full text-center whitespace-nowrap transition-transform duration-1000 ease-in-out " style={{ transform: `translateX(-${currentIndex * (100/6)}%)`}} >
+          <div className="w-full text-center whitespace-nowrap transition-transform duration-1000 ease-in-out" style={{ transform: `translateX(-${currentIndex * (100/6)}%)` }}  >
             {animeList && animeList.map((items) => (
-              <div key={`${items.mal_id}${uniqid()}`} className="py-4 rounded-sm inline-block mr-6 transition-all duration-300 ease-in ">
+              <div key={`${items.mal_id}-${uuid()}`} className="py-4 rounded-sm inline-block mr-6 transition-all duration-300 ease-in" >
                 <div className="w-[260px] h-[325px] ">
                   <img src={items.images.jpg.image_url} alt="image" className="block w-full h-full mx-auto rounded-sm" />
                   </div>

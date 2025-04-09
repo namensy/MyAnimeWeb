@@ -1,6 +1,6 @@
-import React from "react";
 import { assets } from "../assets/assets";
 import { useState, useEffect } from "react";
+
 
 const Hero = () => {
   const [imageIndex, setImageIndex] = useState(1);
@@ -49,8 +49,8 @@ const Hero = () => {
             <div className="h-[97px]">
               {imageIndex === 1 ? (
                 <p className="text-base text-white text-justify">
-                  They say whatever doesn’t kill you makes you stronger, but
-                  that’s not the case for the world’s weakest hunter Sung
+                  They say whatever doesn't kill you makes you stronger, but
+                  that's not the case for the world's weakest hunter Sung
                   Jinwoo. After being brutally slaughtered by monsters in a
                   high-ranking dungeon, Jinwoo came back with the System, a
                   program only he could see, that’s leveling him up in every
@@ -88,18 +88,21 @@ const Hero = () => {
                 className={`btn-style transition-all duration-400  ${
                   imageIndex === 1 ? "bg-orange-400 w-12" : ""
                 }`}
+                aria-label="Show Solo Leveling"
               ></button>
               <button
                 onClick={() => setImageIndex(2)}
                 className={`btn-style transition-all duration-400  ${
                   imageIndex === 2 ? "bg-orange-400 w-12" : ""
                 }`}
+                aria-label="Show Re:Zero"
               ></button>
               <button
                 onClick={() => setImageIndex(3)}
                 className={`btn-style transition-all duration-400  ${
                   imageIndex === 3 ? "bg-orange-400 w-12" : ""
                 }`}
+                aria-label="Show Classroom of the Elite"
               ></button>
             </div>
           </div>

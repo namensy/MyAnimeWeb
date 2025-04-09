@@ -5,7 +5,7 @@ import Allmovies from './components/Allmovies'
 
 
 const App: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState([])
+  const [searchTerm, setSearchTerm] = useState<string[]>([])
 
   return (
     <div className=' text-white relative'>

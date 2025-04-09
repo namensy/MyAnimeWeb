@@ -25,6 +25,7 @@
       background-clip: content-box;
       border: 3px solid transparent
     }  
+
 }
 
 @layer components {
@@ -36,7 +37,7 @@
 @layer utilities {
   .double-gradient {
     background: linear-gradient(to right, black, transparent),
-                linear-gradient(to top, black, transparent);
+    linear-gradient(to top, black, transparent);
     background-blend-mode: multiply;
   }
 }
