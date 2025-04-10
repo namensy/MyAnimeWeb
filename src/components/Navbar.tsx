@@ -1,8 +1,9 @@
 import { assets } from '../assets/assets'
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
+import { SearchProps } from '../types';
 
 
-const Navbar = ({ setSearchTerm, searchTerm }) => {
+const Navbar: React.FC<SearchProps> = ({ setSearchTerm, searchTerm }) => {
 
   const { openSignIn } = useClerk()
   const { user } = useUser()

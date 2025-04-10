@@ -1,8 +1,9 @@
 import axios from "axios";
 import { v4 as uuid } from 'uuid';
 import { useDebounce } from "use-debounce";
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { assets } from "../assets/assets";
+import { SearchProps } from "../types";
 
 interface AnimeItems  {
   mal_id: boolean
@@ -14,12 +15,7 @@ interface AnimeItems  {
   title: string
 }
 
-interface AllmoviesProps {
-  searchTerm: string;
-  setSearchTerm: Dispatch<SetStateAction<string>>;
-}
-
-const Allmovies = ({ setSearchTerm, searchTerm }: AllmoviesProps) => {
+const Allmovies: React.FC<SearchProps> = ({ searchTerm }) => {
   const [animeList, setAnimeList] = useState<AnimeItems[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [debouncedText] = useDebounce(searchTerm, 300);
