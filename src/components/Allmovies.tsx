@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { assets } from "../assets/assets";
 import { SearchProps } from "../types";
 
-interface AnimeItems  {
+interface AnimeItems {
   mal_id: boolean
   images: {
     jpg: {
@@ -24,12 +24,12 @@ const Allmovies: React.FC<SearchProps> = ({ searchTerm }) => {
   const getMovieApi = async () => {
     try {
       const endpoint = await axios.get(
-        debouncedText 
-        ? `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(searchTerm)}`
-        : 'https://api.jikan.moe/v4/top/anime'
-        );
-      const {data: {data}} = endpoint
-      setAnimeList(data)      
+        debouncedText
+          ? `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(searchTerm)}`
+          : 'https://api.jikan.moe/v4/top/anime'
+      );
+      const { data: { data } } = endpoint
+      setAnimeList(data)
     } catch (error) {
       // alert('Error fetching the anime data')
       console.log('Error', error);
@@ -56,7 +56,7 @@ const Allmovies: React.FC<SearchProps> = ({ searchTerm }) => {
   }, [debouncedText])
 
   return (
-    <section >
+    <section>
       <div className={`absolute left-0 bottom-0 w-12 cursor-pointer z-10 py-37.5 px-3 bg-gradient-to-r from-[#0000002c] from-70% to-transparent ${currentIndex === 0 ? 'hidden' : ''}`} onClick={handleLeftClick}>
         <img src={assets.back} alt="Back arrow" />
       </div>
@@ -66,21 +66,20 @@ const Allmovies: React.FC<SearchProps> = ({ searchTerm }) => {
       <div className="container max-w-11/12 mx-auto -mt-[400px] absolute left-20">
         <h1 className=" text-3xl font-bold tracking-wide">Anime Watchlist</h1>
         <p className="text-[#9d9d9d]">Unwind this weekend with your top anime picks</p>
-        <div className="">
-          <div className="w-full text-center whitespace-nowrap transition-transform duration-1000 ease-in-out" style={{ transform: `translateX(-${currentIndex * (100/6)}%)` }}  >
-            {animeList && animeList.map((items) => (
-              <div key={`${items.mal_id}-${uuid()}`} className="py-4 rounded-sm inline-block mr-6 transition-all duration-300 ease-in" >
-                <div className="w-[260px] h-[325px] ">
-                  <img src={items.images.jpg.image_url} alt="image" className="block w-full h-full mx-auto rounded-sm" />
-                  </div>
-                <p className="line-clamp-1 w-[260px] text-black whitespace-normal">
+        <div className="w-full text-center whitespace-nowrap transition-transform duration-1000 ease-in-out " style={{ transform: `translateX(-${currentIndex * (100 / 6)}%)` }}  >
+          {animeList?.map((items) => (
+            <div key={`${items.mal_id}-${uuid()}`} className="py-4 rounded-sm inline-block mr-6 transition-all duration-300 ease-in">
+              <div className="w-[260px] h-[325px] ">
+                <img src={items.images.jpg.image_url} alt="image" className="block w-full h-full mx-auto rounded-sm" />
+              </div>
+              <p className="line-clamp-1 w-[260px] text-white whitespace-normal">
                 {items.title}
-                  </p>
-                </div>
-            ))}
-          </div>
+              </p>
+            </div>
+          ))}
         </div>
       </div>
+      <div className="w-full h-full -mt-11 bg-black"></div>
     </section>
   );
 };
