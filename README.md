@@ -7,7 +7,6 @@ A web application that replicates the popular anime streaming platform Crunchyro
 - Clean and intuitive user interface matching Crunchyroll's design
 - Navigation bar with search functionality
 - User authentication system using Clerk
-- Responsive layout built with Tailwind CSS
 - Fast development environment powered by Vite
 
 ## Tech Stack
