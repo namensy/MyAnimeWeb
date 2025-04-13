@@ -1,18 +1,19 @@
-import { Dispatch, SetStateAction, useState } from 'react'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Allmovies from './components/Allmovies'
-import { SearchProps } from './types'
+import { Routes } from "react-router-dom"
+import { Route } from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+import Allmovies from "./components/Allmovies"
+import New from "./pages/New"
 
-
-const App: React.FC<SearchProps> = () => {
-  const [searchTerm, setSearchTerm] = useState<string | string[]>([])
+const App: React.FC = () => {
 
   return (
-    <div className=' text-white relative'>
-      <Navbar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
-      <Hero />
-      <Allmovies setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>
+    <div className=' text-white relative bg-black min-h-screen'>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<> <Hero /> <Allmovies /></>} />
+        <Route path='/New' element={<New />} />
+      </Routes>
     </div>
   )
 }

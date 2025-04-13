@@ -1,8 +1,8 @@
-import { assets } from "../assets/assets";
-import { useState, useEffect } from "react";
+import { assets } from '@/assets/assets'
+import { useState, useEffect } from 'react'
 
 
-const Hero = () => {
+const Hero: React.FC = () => {
   const [imageIndex, setImageIndex] = useState(1);
 
   const getBackgroundImage = () => {
