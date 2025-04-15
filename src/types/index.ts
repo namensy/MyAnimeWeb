@@ -8,11 +8,13 @@ export interface SearchProps {
 }
 
 export interface AnimeItems {
-  mal_id: boolean
+  mal_id: number
   images: {
     jpg: {
       image_url: string
     }
   }
   title: string
+  year: number
+  synopsis: string
 }

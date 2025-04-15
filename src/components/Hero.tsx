@@ -32,11 +32,7 @@ const Hero: React.FC = () => {
             ) : imageIndex === 2 ? (
               <img src={assets.retext} className="inline-block mt-10" alt="Rezero text" />
             ) : (
-              <img
-                className=" inline-block mt-30"
-                src={assets.cote_text}
-                alt="Cote text"
-              />
+              <img className=" inline-block mt-30" src={assets.cote_text} alt="Cote text" />
             )}
           </div>
           <div className="max-w-xl ">
@@ -85,23 +81,20 @@ const Hero: React.FC = () => {
             <div className="flex gap-2 h-[80px] items-end">
               <button
                 onClick={() => setImageIndex(1)}
-                className={`btn-style transition-all duration-400  ${
-                  imageIndex === 1 ? "bg-orange-400 w-12" : ""
-                }`}
+                className={`btn-style transition-all duration-400  ${imageIndex === 1 ? "bg-orange-400 w-12" : ""
+                  }`}
                 aria-label="Show Solo Leveling"
               ></button>
               <button
                 onClick={() => setImageIndex(2)}
-                className={`btn-style transition-all duration-400  ${
-                  imageIndex === 2 ? "bg-orange-400 w-12" : ""
-                }`}
+                className={`btn-style transition-all duration-400  ${imageIndex === 2 ? "bg-orange-400 w-12" : ""
+                  }`}
                 aria-label="Show Re:Zero"
               ></button>
               <button
                 onClick={() => setImageIndex(3)}
-                className={`btn-style transition-all duration-400  ${
-                  imageIndex === 3 ? "bg-orange-400 w-12" : ""
-                }`}
+                className={`btn-style transition-all duration-400  ${imageIndex === 3 ? "bg-orange-400 w-12" : ""
+                  }`}
                 aria-label="Show Classroom of the Elite"
               ></button>
             </div>

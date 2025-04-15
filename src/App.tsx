@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import Allmovies from "./components/Allmovies"
 import New from "./pages/New"
+import Popular from "./pages/Popular"
+import Search from "./pages/Search"
 
 const App: React.FC = () => {
 
@@ -12,7 +14,9 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path='/' element={<> <Hero /> <Allmovies /></>} />
-        <Route path='/New' element={<New />} />
+        <Route path='/videos/new' element={<New />} />
+        <Route path='/videos/popular' element={<Popular />} />
+        <Route path='/videos/search' element={<Search />} />
       </Routes>
     </div>
   )

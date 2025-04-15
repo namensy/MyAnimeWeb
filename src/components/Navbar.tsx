@@ -1,26 +1,31 @@
 import { assets } from '@/assets/assets'
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '@/context/AppContext';
 
-
 const Navbar: React.FC = () => {
-
   const { openSignIn } = useClerk()
   const { user } = useUser()
   const { searchTerm, setSearchTerm } = useAppContext()
+  const navigate = useNavigate()
 
+  const handleSearchFocus = () => {
+      navigate('/videos/search')
+  }
   return (
     <nav className='flex items-center justify-between bg-black sticky top-0 z-10'>
       <div className='flex gap-2'>
         <Link to="/" className='hover:text-white cursor-pointerbg-white'>
           <img className='w-30 cursor-pointer hover:-translate-y-0.5 transition-transform' src={assets.crunchyroll} alt="Crunchyroll logo" />
         </Link>
-        <Link to="/New" className='hover:-translate-y-0.5 text-center transition-transform text-white p-5 w-25 '>New</Link>
-        <button type='button' className='hover:-translate-y-0.5 transition-transform cursor-pointer text-white p-2 w-25'>Popular</button>
+        <Link to="/videos/new" className='hover:-translate-y-0.5 text-center transition-transform text-white p-5 w-25 '>New</Link>
+        <Link to="/videos/popular" className='hover:-translate-y-0.5 text-center transition-transform text-white p-5 w-25 '>Popular</Link>
       </div>
       <div className='bg-[#454545] rounded-sm border-b-amber-500 focus-within:border-b-2'>
-        <input type="text" placeholder='Search ..' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className='w-full placeholder-white text-white text-lg py-1 pl-4 focus:pr-72 outline-none transition-all duration-400' />
+        <input type="text" placeholder='Search ..' value={searchTerm} 
+        onChange={(e) => setSearchTerm(e.target.value)} 
+        className='w-full placeholder-white text-white text-lg py-1 pl-4 focus:pr-72 outline-none transition-all duration-400' 
+        onFocus={handleSearchFocus}  />
       </div>
       <div className='block hover:-translate-y-0.5 transition-transform text-white px-10 py-5 mr-10'>
         {user ? <UserButton /> : <button type='button' onClick={() => openSignIn()} className='cursor-pointer'>Create Account</button>}
