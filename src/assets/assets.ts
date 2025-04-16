@@ -10,6 +10,8 @@ import next from './next.png';
 import cote from './cote.jpg'
 import cote_text from './cote_text.svg'
 import gamer from './gamer.png'
+import pngegg from './pngegg.png'
+import interface_icon from './interface.png'
 
 
 interface Assets {
@@ -25,6 +27,8 @@ interface Assets {
   cote: string
   cote_text: string
   gamer: string
+  pngegg: string
+  interface_icon: string
 }
 
 export const assets: Assets = {
@@ -40,4 +44,6 @@ export const assets: Assets = {
   cote,
   cote_text,
   gamer,
+  pngegg,
+  interface_icon
 };
