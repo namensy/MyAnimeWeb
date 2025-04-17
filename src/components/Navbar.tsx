@@ -2,16 +2,23 @@ import { assets } from '@/assets/assets'
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '@/context/AppContext';
+import { useState } from 'react';
 
 const Navbar: React.FC = () => {
   const { openSignIn } = useClerk()
   const { user } = useUser()
   const { searchTerm, setSearchTerm } = useAppContext()
+  const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
 
   const handleSearchFocus = () => {
       navigate('/videos/search')
   }
+
+  const handleOpen = (isOpen: boolean) => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <nav className={`flex items-center justify-between bg-black sticky top-0 z-10`}> 
       <div className='hidden lg:flex gap-2'>
@@ -33,11 +40,19 @@ const Navbar: React.FC = () => {
         </div> : <button type='button' onClick={() => openSignIn()} className='cursor-pointer'>Create Account</button>}
       </div>
       {/* {For phone} */}
-      <div className='flex gap-2 lg:hidden'>
-        <div className='flex bg-[#000000] rounded-sm border-b-amber-500 focus-within:border-b-2 h-10 w-10 m-3'>
-          <img src={assets.interface_icon} alt="interface icon" className='w-[160px] h-fit object-contain' />
-          <img src={assets.pngegg} alt="Crunchyroll logo" className='w-full h-full object-contain' />
+      <div className='lg:hidden w-full'>
+        <div className='flex items-center  m-[8.5px] w-full h-full pl-4'>
+          <div className='cursor-pointer'><img src={assets.interface_icon} onClick={() => handleOpen(isOpen)} alt="interface icon" className='object-contain w-5 h-5' /></div>
+          <div><img src={assets.pngegg} alt="Crunchyroll logo" className='object-contain p-2 w-18' /></div>
         </div>
+        </div>
+        <div className={`${isOpen ? 'block' : 'hidden'} absolute flex flex-col items-center justify-between top-16 gap-5 bg-[#23252b] pr-35 pb-10`}>
+          <div className='ml-1 mt-5'>
+            <h1>New</h1>
+          </div>
+          <div className='ml-6'>
+            <h1>Popular</h1>
+          </div>
       </div>
     </nav>
   )
