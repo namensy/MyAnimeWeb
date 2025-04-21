@@ -4,31 +4,15 @@ import { useState, useEffect } from 'react'
 
 const Hero: React.FC = () => {
   const [imageIndex, setImageIndex] = useState(1);
-  const [isMobile, setIsMobile] = useState('');
 
   const getBackgroundImage = () => {
     if (window.innerWidth < 768 && imageIndex === 1) return `${assets.solomobile}`;
-    if (imageIndex === 1) return `${assets.solo}`;
-    if (imageIndex === 2) return `${assets.rezero}`;
-    return `${assets.cote}`;
+    if (window.innerWidth < 768 && imageIndex === 2) return `${assets.rezeromobile}`;
+    if (window.innerWidth < 768 && imageIndex === 3) return `${assets.cotemobile}`;
+    if (window.innerWidth > 768 && imageIndex === 1) return `${assets.solo}`;
+    if (window.innerWidth > 768 && imageIndex === 2) return `${assets.rezero}`;
+    if (window.innerWidth > 768 && imageIndex === 3) return `${assets.cote}`;
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) { // ขนาดหน้าจอเล็กกว่า 768px
-        setIsMobile(assets.solomobile); // เปลี่ยนเป็นรูปที่ต้องการสำหรับหน้าจอเล็ก
-      } else {
-        setIsMobile(assets.solo); // เปลี่ยนกลับเป็นรูปเดิมสำหรับหน้าจอใหญ่
-      }
-    };
-    handleResize();
-    // ตั้งค่า event listener สำหรับการเปลี่ยนขนาดหน้าจอ
-    window.addEventListener('resize', handleResize);
-    // ลบ event listener เมื่อคอมโพเนนต์ถูกลบ
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,11 +24,11 @@ const Hero: React.FC = () => {
   return (
     <main
       style={{ backgroundImage: `url('${getBackgroundImage()}')` }}
-      className={` h-full flex justify-center items-center scale-[1] transition-all ease duration-400 bg-center lg:bg-cover bg-no-repeat`}
+      className={` h-full flex justify-center items-center scale-[1] transition-all ease duration-400 lg:bg-cover bg-no-repeat`}
     >
-      <div className=" w-full h-full text-9xl double-gradient">
+      <div className=" w-full h-full text-9xl lg:mobile-gradient double-gradient">
         <div className="flex flex-col justify-center items-center md:items-start md:justify-start container max-w-11/12 mx-auto">
-          <div className="w-2/7 h-full mt-[70px] mb-10 ">
+          <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] lg:mt-[70px] mb-5 lg:mb-10 ">
             {imageIndex === 1 ? (
               <img src={assets.qwerty} alt="Sololeveling text" className='inline-block w-full h-full' />
             ) : imageIndex === 2 ? (
