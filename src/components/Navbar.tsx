@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
       {/* {For phone} */}
       <div className='lg:hidden w-full'>
         <div className='flex items-center  m-[8.5px] w-full h-full pl-4'>
-          <div className='cursor-pointer'><img src={assets.interface_icon} onClick={() => handleOpen(isOpen)} alt="interface icon" className='object-contain w-5 h-5' /></div>
+          <div className='cursor-pointer '><img src={assets.interface_icon} onClick={() => handleOpen(isOpen)} alt="interface icon" className='object-contain w-5 h-5' /></div>
           <div><img src={assets.pngegg} alt="Crunchyroll logo" className='object-contain p-2 w-18' /></div>
         </div>
         </div>

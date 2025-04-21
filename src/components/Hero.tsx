@@ -4,13 +4,31 @@ import { useState, useEffect } from 'react'
 
 const Hero: React.FC = () => {
   const [imageIndex, setImageIndex] = useState(1);
+  const [isMobile, setIsMobile] = useState('');
 
   const getBackgroundImage = () => {
+    if (window.innerWidth < 768 && imageIndex === 1) return `${assets.solomobile}`;
     if (imageIndex === 1) return `${assets.solo}`;
     if (imageIndex === 2) return `${assets.rezero}`;
     return `${assets.cote}`;
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) { // ขนาดหน้าจอเล็กกว่า 768px
+        setIsMobile(assets.solomobile); // เปลี่ยนเป็นรูปที่ต้องการสำหรับหน้าจอเล็ก
+      } else {
+        setIsMobile(assets.solo); // เปลี่ยนกลับเป็นรูปเดิมสำหรับหน้าจอใหญ่
+      }
+    };
+    handleResize();
+    // ตั้งค่า event listener สำหรับการเปลี่ยนขนาดหน้าจอ
+    window.addEventListener('resize', handleResize);
+    // ลบ event listener เมื่อคอมโพเนนต์ถูกลบ
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,38 +40,38 @@ const Hero: React.FC = () => {
   return (
     <main
       style={{ backgroundImage: `url('${getBackgroundImage()}')` }}
-      className={`h-[1200px] flex justify-center items-center scale-[1] transition-all ease duration-400 bg-center bg-cover bg-no-repeat`}
+      className={` h-full flex justify-center items-center scale-[1] transition-all ease duration-400 bg-center lg:bg-cover bg-no-repeat`}
     >
       <div className=" w-full h-full text-9xl double-gradient">
-        <div className="container max-w-11/12 mx-auto">
-          <div className="w-[400px] h-[250px] mt-[150px] ">
+        <div className="flex flex-col justify-center items-center md:items-start md:justify-start container max-w-11/12 mx-auto">
+          <div className="w-2/7 h-full mt-[70px] mb-10 ">
             {imageIndex === 1 ? (
-              <img src={assets.qwerty} alt="Sololeveling text" />
+              <img src={assets.qwerty} alt="Sololeveling text" className='inline-block w-full h-full' />
             ) : imageIndex === 2 ? (
-              <img src={assets.retext} className="inline-block mt-10" alt="Rezero text" />
+              <img src={assets.retext} className="inline-block w-full h-full mt-10" alt="Rezero text" />
             ) : (
-              <img className=" inline-block mt-30" src={assets.cote_text} alt="Cote text" />
+              <img className=" inline-block w-full h-full mt-30" src={assets.cote_text} alt="Cote text" />
             )}
           </div>
-          <div className="max-w-xl ">
-            <p className="text-sm text-[#9b9ba0] my-2">
+          <div className="w-full md:w-2/5 flex flex-col items-center justify-center md:items-start md:justify-start">
+            <p className="text-sm text-[#9b9ba0] ">
               <span className="text-white inline-block px-[5px] bg-[#34373e] -skew-x-12">
                 16+
               </span>{" "}
               • Sub | Dub • Action, Adventure, Fantasy
             </p>
-            <div className="h-[97px]">
+            <div className="hidden lg:block h-[97px]">
               {imageIndex === 1 ? (
-                <p className="text-base text-white text-justify">
+                <p className="text-base text-white text-justify line-clamp-4">
                   They say whatever doesn't kill you makes you stronger, but
                   that's not the case for the world's weakest hunter Sung
                   Jinwoo. After being brutally slaughtered by monsters in a
                   high-ranking dungeon, Jinwoo came back with the System, a
-                  program only he could see, that’s leveling him up in every
-                  way. Now, he’s...
+                  program only he could see, that's leveling him up in every
+                  way. Now, he's...
                 </p>
               ) : imageIndex === 2 ? (
-                <p className="text-base text-white text-justify">
+                <p className="text-base text-white text-justify line-clamp-4">
                   Natsuki Subaru, an ordinary high school student, is on his way
                   home from the convenience store when he finds himself
                   transported to another world. As he's lost and confused in a
@@ -62,7 +80,7 @@ const Hero: React.FC = () => {
                   hair.
                 </p>
               ) : (
-                <p className="text-base text-white text-justify">
+                <p className="text-base text-white text-justify line-clamp-4">
                   Kiyotaka Ayanokoji has just enrolled at Tokyo Koudo Ikusei
                   Senior High School, where it's said that 100% of students go
                   on to college or find employment. But he ends up in Class 1-D,
@@ -70,15 +88,17 @@ const Hero: React.FC = () => {
                 </p>
               )}
             </div>
-            <button className="text-[16px] cursor-pointer py-1 pr-5 pl-2 flex items-center gap-1 mt-8 bg-[#ff640a] font-bold tracking-wide hover:bg-[#ff7b2e] transition-all">
-              <img
-                className="w-8 h-8 "
-                src={assets.caret_right}
-                alt="caret right"
-              />
-              START WATCHING
-            </button>
-            <div className="flex gap-2 h-[80px] items-end">
+            <div className='w-full min-w-[200px] md:max-w-[200px] md:w-2/5 text-black text-[16px] cursor-pointer py-1 pr-5 pl-2 mt-4 font-bold tracking-wide bg-[#ff640a] hover:bg-[#ff7b2e] transition-all'>
+              <button className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
+                <img
+                  className="w-8 h-8 "
+                  src={assets.caret_right}
+                  alt="caret right"
+                />
+                <p className='text-black text-sm'>START WATCHING</p>
+              </button>
+            </div>
+            <div className="flex gap-2 h-full items-end mt-8 lg:mt-15">
               <button
                 onClick={() => setImageIndex(1)}
                 className={`btn-style transition-all duration-400  ${imageIndex === 1 ? "bg-orange-400 w-12" : ""

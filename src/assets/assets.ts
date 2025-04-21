@@ -12,6 +12,7 @@ import cote_text from './cote_text.svg'
 import gamer from './gamer.png'
 import pngegg from './pngegg.png'
 import interface_icon from './interface.png'
+import solomobile from './solomobile.png'
 
 
 interface Assets {
@@ -29,6 +30,7 @@ interface Assets {
   gamer: string
   pngegg: string
   interface_icon: string
+  solomobile: string
 }
 
 export const assets: Assets = {
@@ -45,5 +47,6 @@ export const assets: Assets = {
   cote_text,
   gamer,
   pngegg,
-  interface_icon
+  interface_icon,
+  solomobile
 };
