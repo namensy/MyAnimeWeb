@@ -14,7 +14,7 @@ import pngegg from './pngegg.png'
 import interface_icon from './interface.png'
 import solomobile from './solomobile.png'
 import rezeromobile from './rezeromobile.jpg'
-import cotemobile from './cotemobile.png'
+import cotemobile from './cotemobile.jpg'
 
 
 interface Assets {

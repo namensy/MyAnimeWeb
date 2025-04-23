@@ -4,29 +4,47 @@ import { useState, useEffect } from 'react'
 
 const Hero: React.FC = () => {
   const [imageIndex, setImageIndex] = useState(1);
+  const [backgroundImage, setBackgroundImage] = useState<string>('');
+
 
   const getBackgroundImage = () => {
-    if (window.innerWidth < 768 && imageIndex === 1) return `${assets.solomobile}`;
-    if (window.innerWidth < 768 && imageIndex === 2) return `${assets.rezeromobile}`;
-    if (window.innerWidth < 768 && imageIndex === 3) return `${assets.cotemobile}`;
-    if (window.innerWidth > 768 && imageIndex === 1) return `${assets.solo}`;
-    if (window.innerWidth > 768 && imageIndex === 2) return `${assets.rezero}`;
-    if (window.innerWidth > 768 && imageIndex === 3) return `${assets.cote}`;
+    if (window.innerWidth < 1024 && imageIndex === 1) {
+      return `${assets.solomobile}`
+    } else if (window.innerWidth < 1024 && imageIndex === 2) {
+      return `${assets.rezeromobile}`
+    } else if (window.innerWidth < 1024 && imageIndex === 3) {
+      return `${assets.cotemobile}`
+    } else if (window.innerWidth > 1024 && imageIndex === 1) {
+      return `${assets.solo}`
+    } else if (window.innerWidth > 1024 && imageIndex === 2) {
+      return `${assets.rezero}`
+    } else if (window.innerWidth > 1024 && imageIndex === 3) {
+      return `${assets.cote}`
+    }
   };
 
+  const handleResize = () => {
+      setBackgroundImage(getBackgroundImage() as string)
+  }
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setImageIndex((prev) => (prev === 3 ? 1 : prev + 1));
-    }, 10000);
-    return () => clearInterval(interval);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setImageIndex((prev) => (prev === 3 ? 1 : prev + 1));
+  //   }, 10000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <main
-      style={{ backgroundImage: `url('${getBackgroundImage()}')` }}
-      className={` h-full flex justify-center items-center scale-[1] transition-all ease duration-400 lg:bg-cover bg-no-repeat`}
+      style={{ backgroundImage: `url('${getBackgroundImage()}')`, }}
+      className={` h-full flex justify-center items-center transition-all ease duration-400 bg-cover bg-right lg:bg-cover bg-no-repeat`}
     >
-      <div className=" w-full h-full text-9xl lg:mobile-gradient double-gradient">
+      <div className="w-full h-full text-9xl mobile-gradient lg:double-gradient bg-blend-normal">
         <div className="flex flex-col justify-center items-center md:items-start md:justify-start container max-w-11/12 mx-auto">
           <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] lg:mt-[70px] mb-5 lg:mb-10 ">
             {imageIndex === 1 ? (
@@ -38,7 +56,7 @@ const Hero: React.FC = () => {
             )}
           </div>
           <div className="w-full md:w-2/5 flex flex-col items-center justify-center md:items-start md:justify-start">
-            <p className="text-sm text-[#9b9ba0] ">
+            <p className="text-sm text-[#9b9ba0] w-full h-full ">
               <span className="text-white inline-block px-[5px] bg-[#34373e] -skew-x-12">
                 16+
               </span>{" "}
@@ -84,18 +102,21 @@ const Hero: React.FC = () => {
             </div>
             <div className="flex gap-2 h-full items-end mt-8 lg:mt-15">
               <button
+              type='button'
                 onClick={() => setImageIndex(1)}
                 className={`btn-style transition-all duration-400  ${imageIndex === 1 ? "bg-orange-400 w-12" : ""
                   }`}
                 aria-label="Show Solo Leveling"
               ></button>
               <button
+                type='button'
                 onClick={() => setImageIndex(2)}
                 className={`btn-style transition-all duration-400  ${imageIndex === 2 ? "bg-orange-400 w-12" : ""
                   }`}
                 aria-label="Show Re:Zero"
               ></button>
               <button
+                type='button'
                 onClick={() => setImageIndex(3)}
                 className={`btn-style transition-all duration-400  ${imageIndex === 3 ? "bg-orange-400 w-12" : ""
                   }`}
