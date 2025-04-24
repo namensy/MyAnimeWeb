@@ -25,7 +25,7 @@
       background-clip: content-box;
       border: 3px solid transparent
     }  
-
+    
 }
 
 @layer components {
@@ -36,11 +36,11 @@
 
 @layer utilities {
   .mobile-gradient {
-    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+    background: linear-gradient(to top, black, transparent);
   }
   .double-gradient {
     background: 
-      linear-gradient(to right, rgba(0, 0, 0, 1), transparent),
+      linear-gradient(to right, #00000080, transparent),
       linear-gradient(to top, black, transparent);
     background-blend-mode: multiply;
   }

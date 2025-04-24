@@ -10,13 +10,13 @@ const Hero: React.FC = () => {
 
   const getBackgroundImage = () => {
     if (window.innerWidth < 768 && imageIndex === 1) {
-      return `${assets.solomobile}`
+      return `${assets.solo}`
     } else if (window.innerWidth < 768 && imageIndex === 2) {
       return `${assets.rezeromobile}`
     } else if (window.innerWidth < 768 && imageIndex === 3) {
       return `${assets.cotemobile}`
     } else if (window.innerWidth > 768 && imageIndex === 1) {
-      return `${assets.solo}`
+      return `${assets.solomobile}`
     } else if (window.innerWidth > 768 && imageIndex === 2) {
       return `${assets.rezero}`
     } else if (window.innerWidth > 768 && imageIndex === 3) {
@@ -46,10 +46,10 @@ const Hero: React.FC = () => {
       style={{ backgroundImage: `url('${getBackgroundImage()}')`, }}
       className={` h-full flex justify-center items-center transition-all ease duration-400 bg-cover bg-right lg:bg-cover bg-no-repeat`}
     >
-      <div className='w-full h-full'>
-        <div className="w-full h-full text-9xl lg:double-gradient">
+      
+        <div className="w-full h-full text-9xl double-gradient lg:pt-70">
           <div className="flex flex-col justify-center items-center md:items-start md:justify-start container max-w-11/12 mx-auto">
-            <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] lg:mt-[70px] mb-5 lg:mb-10 ">
+            <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] lg:mt-0 mb-5 lg:mb-10 ">
               {imageIndex === 1 ? (
                 <img src={assets.qwerty} alt="Sololeveling text" className='inline-block w-full h-full' />
               ) : imageIndex === 2 ? (
@@ -89,7 +89,7 @@ const Hero: React.FC = () => {
                     Kiyotaka Ayanokoji has just enrolled at Tokyo Koudo Ikusei
                     Senior High School, where it's said that 100% of students go
                     on to college or find employment. But he ends up in Class 1-D,
-                    which is full of all the school's problem children.
+                    which is full of all the schol's problem children.
                   </p>
                 )}
               </div>
@@ -129,7 +129,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
       </div>
-      </div>
+      
     </main>
   );
 };
