@@ -41,7 +41,7 @@
   .double-gradient {
     background: 
       linear-gradient(to right, #00000080, transparent),
-      linear-gradient(to top, black, transparent);
+      linear-gradient(to top, black , transparent);
     background-blend-mode: multiply;
   }
 }
