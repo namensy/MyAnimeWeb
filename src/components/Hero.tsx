@@ -1,5 +1,6 @@
 import { assets } from '@/assets/assets'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 
 
 const Hero: React.FC = () => {
@@ -13,14 +14,12 @@ const Hero: React.FC = () => {
       return `${assets.solo}`
     } else if (window.innerWidth < 768 && imageIndex === 2) {
       return `${assets.rezeromobile}`
-    } else if (window.innerWidth < 768 && imageIndex === 3) {
-      return `${assets.cotemobile}`
     } else if (window.innerWidth > 768 && imageIndex === 1) {
       return `${assets.solomobile}`
     } else if (window.innerWidth > 768 && imageIndex === 2) {
       return `${assets.rezero}`
-    } else if (window.innerWidth > 768 && imageIndex === 3) {
-      return `${assets.cote}`
+    } else if (imageIndex === 3) {
+      return `${assets.cotemobile}`
     }
 
   };
@@ -43,12 +42,13 @@ const Hero: React.FC = () => {
 
   return (
     <main
-      className={`mx-auto w-4/4 lg:w-full h-full flex justify-center items-center transition-all ease duration-400 ${imageIndex === 1 && `bg-[left_20%_top]`} ${imageIndex === 3 && `bg-[left_45%_top]`} lg:bg-top bg-cover bg-no-repeat`}
+      className={`mx-auto w-4/4 lg:w-full h-full flex justify-center items-center transition-all ease duration-400 
+        ${imageIndex === 1 && `bg-[left_20%_top]`} ${imageIndex === 3 && `bg-[left_45%_top]`} lg:bg-top bg-cover bg-no-repeat`}
       style={{ backgroundImage: `url('${getBackgroundImage()}')`, }}
     >
       <div className="w-full h-full text-9xl double-gradient lg:pt-70">
         <div className="flex flex-col justify-center items-center md:items-start md:justify-start container max-w-11/12 mx-auto">
-          <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] lg:mt-0 mb-5 lg:mb-10 ">
+          <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] md:mt-20 lg:mt-0 mb-5 lg:mb-10 ">
             {imageIndex === 1 ? (
               <img src={assets.qwerty} alt="Sololeveling text" className='inline-block w-full h-full' />
             ) : imageIndex === 2 ? (
@@ -93,14 +93,14 @@ const Hero: React.FC = () => {
               )}
             </div>
             <div className='w-full min-w-[200px] md:max-w-[200px] md:w-2/5 text-black text-[16px] cursor-pointer py-1 pr-5 pl-2 mt-4 font-bold tracking-wide bg-[#ff640a] hover:bg-[#ff7b2e] transition-all'>
-              <button className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
+              <Link to={`/videos/52991`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
                 <img
                   className="w-8 h-8 "
                   src={assets.caret_right}
                   alt="caret right"
                 />
                 <p className='text-black text-sm'>START WATCHING</p>
-              </button>
+              </Link>
             </div>
             <div className="flex gap-2 h-full items-end mt-8 lg:mt-15">
               <button

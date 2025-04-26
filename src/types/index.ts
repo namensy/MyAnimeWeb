@@ -10,11 +10,14 @@ export interface SearchProps {
 export interface AnimeItems {
   mal_id: number
   images: {
-    jpg: {
+    webp: {
       image_url: string
     }
   }
   title: string
   year: number
   synopsis: string
+  score: number
+  scored_by: number
+  episodes: number
 }

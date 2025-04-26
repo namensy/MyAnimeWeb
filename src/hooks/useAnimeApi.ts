@@ -4,6 +4,7 @@ import { useDebounce } from 'use-debounce';
 import { AnimeItems } from '@/types';
 import { useAppContext } from '@/context/AppContext';
 import { useMatch } from 'react-router-dom';
+import { log } from 'node:console';
 
 
 export const useAnimeApi = (searchTerm: string | string[]) => {
@@ -32,6 +33,7 @@ export const useAnimeApi = (searchTerm: string | string[]) => {
         : ''
       );
       const { data: { data } } = endpoint;
+      console.log(data);
       const uniqueAnimeList = Array.from(new Map(data.map((item: AnimeItems) => [item.title, item])).values()) as AnimeItems[]
       setAnimeList(uniqueAnimeList);
     } catch (error) {

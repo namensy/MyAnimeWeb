@@ -6,6 +6,7 @@ import Allmovies from "./components/Allmovies"
 import New from "./pages/New"
 import Popular from "./pages/Popular"
 import Search from "./pages/Search"
+import Details from "./pages/Details"
 
 const App: React.FC = () => {
 
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Route path='/videos/new' element={<New />} />
         <Route path='/videos/popular' element={<Popular />} />
         <Route path='/videos/search' element={<Search />} />
+        <Route path='/videos/:id' element={<Details />} />
       </Routes>
     </div>
   )
