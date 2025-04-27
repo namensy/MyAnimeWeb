@@ -18,7 +18,7 @@ const New: React.FC = () => {
         ) : (
           <div className='grid grid-cols-6 gap  -6'>
             {animeList.map((item) => (
-              <Link to={`/anime/${item.mal_id}`} key={`${item.mal_id}-${uuidv4()}`}>
+              <Link to={`/watch/${item.mal_id}`} key={`${item.mal_id}-${uuidv4()}`}>
                 <div className='w-[150px] h-[220px]'>
                   <div className="relative w-full h-full">
                     <img src={item.images.jpg.image_url} alt={item.title} className={`w-full h-full object-cover`} />
