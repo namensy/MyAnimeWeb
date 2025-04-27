@@ -18,7 +18,7 @@ const App: React.FC = () => {
         <Route path='/videos/new' element={<New />} />
         <Route path='/videos/popular' element={<Popular />} />
         <Route path='/videos/search' element={<Search />} />
-        <Route path='/videos/:id' element={<Details />} />
+        <Route path='/watch/:id' element={<Details />} />
       </Routes>
     </div>
   )

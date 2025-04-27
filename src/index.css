@@ -35,6 +35,9 @@
 }
 
 @layer utilities {
+  .text-muted-foreground {
+    color: #94a3b8;
+  }
   .mobile-gradient {
     background: linear-gradient(to top, black, transparent);
   }

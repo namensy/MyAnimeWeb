@@ -50,16 +50,16 @@ const Hero: React.FC = () => {
         <div className="flex flex-col justify-center items-center md:items-start md:justify-start container max-w-11/12 mx-auto">
           <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] md:mt-20 lg:mt-0 mb-5 lg:mb-10 ">
             {imageIndex === 1 ? (
-              <img src={assets.qwerty} alt="Sololeveling text" className='inline-block w-full h-full' />
+              <img src={assets.qwerty} alt="Sololeveling text" className='inline-block w-full h-full' decoding='async' loading='lazy' />
             ) : imageIndex === 2 ? (
-              <img src={assets.retext} className="inline-block w-full h-full mt-10" alt="Rezero text" />
+              <img src={assets.retext} className="inline-block w-full h-full mt-10" alt="Rezero text" decoding='async' loading='lazy' />
             ) : (
-              <img className=" inline-block w-full h-full mt-30" src={assets.cote_text} alt="Cote text" />
+              <img className=" inline-block w-full h-full mt-30" src={assets.cote_text} alt="Cote text" decoding='async' loading='lazy' />
             )}
           </div>
           <div className="w-full md:w-2/5 flex flex-col items-center justify-center md:items-start md:justify-start">
             <p className="text-sm text-[#9b9ba0] w-full h-full ">
-              <span className="text-white inline-block px-[5px] bg-[#34373e] -skew-x-12">
+              <span className="text-white inline-block px-[5px] bg-[#34373e] -skew-x-12 mb-3 lg:mb-5">
                 16+
               </span>{" "}
               • Sub | Dub • Action, Adventure, Fantasy
@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
               )}
             </div>
             <div className='w-full min-w-[200px] md:max-w-[200px] md:w-2/5 text-black text-[16px] cursor-pointer py-1 pr-5 pl-2 mt-4 font-bold tracking-wide bg-[#ff640a] hover:bg-[#ff7b2e] transition-all'>
-              <Link to={`/videos/52991`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
+              <Link to={`/watch/58567`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
                 <img
                   className="w-8 h-8 "
                   src={assets.caret_right}

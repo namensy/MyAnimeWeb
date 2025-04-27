@@ -47,7 +47,7 @@ const Allmovies: React.FC = () => {
             animeList?.map((items) => (
               <div key={`${items.mal_id}-${uuid()}`} className="w-2/6 md:w-1/6 h-full relative py-4 rounded-sm inline-block mr-2 md:mr-4 lg:mr-6 mt-5">
                 <div className="w-full h-auto aspect-[2/3] hover:bg-opacity-75 transition-all duration-300 ease-in-out">
-                  <img src={items.images.webp.image_url} alt="image" className="block w-full h-full mx-auto rounded-sm object-cover" />
+                  <img src={items.images.webp.image_url} alt="image" decoding='async' loading='lazy' className="block w-full h-full mx-auto rounded-sm object-cover" />
                 </div>
                 <p className="line-clamp-1 w-full text-white whitespace-normal mt-2 text-sm">{items.title}</p>
                 <p className="text-[#9d9d9d] text-sm">{items.year ? items.year : 'No-info'}</p>
