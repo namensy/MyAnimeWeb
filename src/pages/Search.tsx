@@ -18,7 +18,7 @@ const New: React.FC = () => {
             <Loading />
           ) : (
             animeList.map((item) => (
-              <Link to={`/anime/${item.mal_id}`} key={`${item.mal_id}-${uuidv4()}`}>
+              <Link to={`/watch/${item.mal_id}`} key={`${item.mal_id}-${uuidv4()}`}>
                 <div className='w-[150px] h-[220px]'>
                   <img src={item.images.jpg.image_url} alt={item.title} className='w-full h-full object-cover' />
                 </div>

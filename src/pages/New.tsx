@@ -17,14 +17,14 @@ const New: React.FC = () => {
           <Loading />
         ) : (
           <div className='grid grid-cols-6 gap  -6'>
-            {animeList.map((item) => (
-              <Link to={`/watch/${item.mal_id}`} key={`${item.mal_id}-${uuidv4()}`}>
+            {animeList.map(({ mal_id, images, title_english, title}) => (
+              <Link to={`/watch/${mal_id}`} key={`${mal_id}-${uuidv4()}`}>
                 <div className='w-[150px] h-[220px]'>
                   <div className="relative w-full h-full">
-                    <img src={item.images.jpg.image_url} alt={item.title} className={`w-full h-full object-cover`} />
+                    <img src={images.jpg.image_url} alt={title_english || title} className={`w-full h-full object-cover`} />
                   </div>
                 </div>
-                <h2 className='text-sm line-clamp-3'>{item.title}</h2>
+                <h2 className='text-sm line-clamp-3'>{title_english || title}</h2>
               </Link>
             ))}
           </div>
