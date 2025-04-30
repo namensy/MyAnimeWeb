@@ -13,7 +13,7 @@ const Details = () => {
           <div key={mal_id}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               <div className="relative">
-                <div className="sticky top-8 flex flex-col gap-4">
+                <div className="flex flex-col gap-4">
                   <div className="relative group rounded-lg overflow-hidden shadow-lg:">
                     <img src={images.webp.large_image_url} alt={title_english} className="w-full h-full" decoding="async" loading="lazy" />
                   </div>
@@ -141,7 +141,12 @@ const Details = () => {
               </div>
             </div>
             <div dir="ltr" data-orientation="horizontal" className="w-full mb-12">
-              <div role="tablist" aria-orientation="horizontal" className="h-10 items-center justify-center rounded-md bg-[#1e293b] p-1 text-muted-foreground grid w-full grid-cols-2 md:grid-cols-4 mb-6" tabIndex={0} data-orientation="horizontal" style={{ outline: "none" }}></div>
+              <div role="tablist" aria-orientation="horizontal" className="h-10 items-center justify-center rounded-md bg-[#1e293b] p-1 text-muted-foreground grid w-full grid-cols-2 md:grid-cols-4 mb-6 outline-0" tabIndex={0} data-orientation="horizontal">
+                <button type="button" role="tab" aria-selected="true" aria-controls="overview" className="text-sm font-medium">Overview</button>
+                <button type="button" role="tab" aria-selected="false" aria-controls="episodes" className="text-sm font-medium">Episodes</button>
+                <button type="button" role="tab" aria-selected="false" aria-controls="characters" className="text-sm font-medium">Characters</button>
+                <button type="button" role="tab" aria-selected="false" aria-controls="related" className="text-sm font-medium">Related</button>
+              </div>
             </div>
           </div>
         ))}
