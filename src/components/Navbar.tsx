@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
   }
 
   return (
-    <nav className={`flex items-center justify-between bg-black sticky top-0 z-10`}> 
+    <nav className={`flex items-center justify-between bg-[#23252b] sticky top-0 z-10`}> 
       <div className='hidden lg:flex gap-2'>
         <Link to="/" className='hover:text-white cursor-pointer'>
           <img className='w-30 cursor-pointer hover:-translate-y-0.5 transition-transform' src={assets.crunchyroll} alt="Crunchyroll logo" />

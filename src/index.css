@@ -7,6 +7,10 @@
   --ring: hsl(46, 83%, 53%);
 }
 
+[role=button],button {
+  cursor: pointer
+}
+
 @layer base {
   * {
     font-family: Outfit, sans-serif;
