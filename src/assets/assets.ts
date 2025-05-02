@@ -16,6 +16,8 @@ import solomobile from './solomobile.png'
 import rezeromobile from './rezeromobile.jpg'
 import cotemobile from './cotemobile.png'
 import play_button from './play-button.png'
+import anivibe from './anivibe.png'
+
 
 interface Assets {
   crunchyroll: string
@@ -36,6 +38,7 @@ interface Assets {
   rezeromobile: string
   cotemobile: string
   play_button: string
+  anivibe: string
 }
 
 export const assets: Assets = {
@@ -56,5 +59,6 @@ export const assets: Assets = {
   solomobile,
   rezeromobile,
   cotemobile,
-  play_button
+  play_button,
+  anivibe
 };

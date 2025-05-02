@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import { useDebounce } from "use-debounce";
 import { AnimeItems } from "@/types";
@@ -19,6 +19,8 @@ export const useAnimeApi = (searchTerm: string | string[]) => {
     typeof searchTerm === "string" ? searchTerm : "",
     300
   );
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const getMovieApi = async () => {
     setLoading(true);
@@ -51,7 +53,12 @@ export const useAnimeApi = (searchTerm: string | string[]) => {
         setAnimeList([data]);
       }
     } catch (error) {
-      console.log(error);
+      setIsError(true)
+      if (axios.isAxiosError(error)) {
+        setErrorMessage(error.message)
+      } else {
+        setErrorMessage('Failed to fetch Anime')
+      }
     } finally {
       setLoading(false);
     }
@@ -59,22 +66,15 @@ export const useAnimeApi = (searchTerm: string | string[]) => {
 
   useEffect(() => {
     getMovieApi();
-    // getNewMovieApi();
   }, [debouncedText, id]);
 
-  // For API testing purposes
-  // const getNewMovieApi = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const endpoint = await axios.get('https://api.jikan.moe/v4/anime/58567');
-  //     const { data: { data } } = endpoint;
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log('Error', error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
-  return { animeList, loading, getMovieApi };
+  return { 
+    animeList, 
+    isError,
+    errorMessage,
+    loading, 
+    getMovieApi,
+    refreshAnime: getMovieApi
+  };
 };

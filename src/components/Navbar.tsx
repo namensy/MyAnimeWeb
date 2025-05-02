@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
     <nav className={`flex items-center justify-between bg-[#23252b] sticky top-0 z-10`}> 
       <div className='hidden lg:flex gap-2'>
         <Link to="/" className='hover:text-white cursor-pointer'>
-          <img className='w-30 cursor-pointer hover:-translate-y-0.5 transition-transform' src={assets.crunchyroll} alt="Crunchyroll logo" />
+          <img className='w-15 ml-8 cursor-pointer hover:-translate-y-0.5 transition-transform' src={assets.anivibe} alt="AniVibe logo" />
         </Link>
         <Link to="/videos/new" className='hover:-translate-y-0.5 text-center transition-transform text-white p-5 w-25 '>New</Link>
         <Link to="/videos/popular" className='hover:-translate-y-0.5 text-center transition-transform text-white p-5 w-25 '>Popular</Link>

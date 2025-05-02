@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import Loading from '@/components/Loading';
 
-
 const Allmovies: React.FC = () => {
   const { searchTerm, loading } = useAppContext()
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -28,6 +27,7 @@ const Allmovies: React.FC = () => {
       setCurrentIndex(0)
     }
   }
+
 
   return (
     <section className='w-full min-h-screen relativ mt-11 '>
