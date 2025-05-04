@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { useState } from "react";
-import { assets } from "@/assets/assets";
+import { icons } from "@/assets/images";
 import { useAnimeApi } from "@/hooks/useAnimeApi";
 import { useAppContext } from '@/context/AppContext';
 import { formatSiUnit } from "format-si-unit"
@@ -32,10 +32,10 @@ const Allmovies: React.FC = () => {
   return (
     <section className='w-full min-h-screen relativ mt-11 '>
       <div className={` absolute left-0 bottom-0 w-10 md:w-12 cursor-pointer z-10 py-37.5 px-3 bg-gradient-to-r from-[#0000002c] from-70% to-transparent ${currentIndex === 0 ? 'hidden' : ''}`} onClick={handleLeftClick}>
-        <img src={assets.back} alt="Back arrow" />
+        <img src={icons.back} alt="Back arrow" />
       </div>
       <div className={`absolute right-0 bottom-0 w-9 md:w-12 cursor-pointer z-10 py-37.5 px-3 bg-gradient-to-r from-[#0000002c] from-70% to-transparent ${currentIndex === 18 ? 'hidden' : ''}`} onClick={handleRightClick}>
-        <img src={assets.next} alt="Right arrow" />
+        <img src={icons.next} alt="Right arrow" />
       </div>
       <div className=" container w-11/12 mt-15 absolute left-4 sm:left-8 lg:left-12 xl:left-16 2xl:left-20 ">
         <h1 className=" text-3xl font-bold tracking-wide">Anime Watchlist</h1>

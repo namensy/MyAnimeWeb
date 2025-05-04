@@ -40,9 +40,8 @@ export const useAnimeApi = (searchTerm: string | string[]) => {
           ? `https://api.jikan.moe/v4/anime/${id}`
           : ""
       );
-      const {
-        data: { data },
-      } = endpoint;
+      const {data: { data } } = endpoint;
+      
       if (data.length > 1) {
         setAnimeList(
           Array.from(
