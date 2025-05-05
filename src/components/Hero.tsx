@@ -1,18 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { backgrounds, icons } from '@/assets/images'
-import { useAnimeIdApi } from '@/hooks/useAnimeIdApi';
 import { useMultipleAnimeApi } from '@/hooks/useMultipleAnimeApi';
 
 const Hero: React.FC = () => {
   const [imageIndex, setImageIndex] = useState(1);
   const [backgroundImage, setBackgroundImage] = useState<string>();
 
-  const { animeId: Sololeveling } = useAnimeIdApi(58567)
-  const { animeId: Rezero } = useAnimeIdApi(31240)
-  const { animeId: Classroom } = useAnimeIdApi(35507)
-
-  // const { animes } = useMultipleAnimeApi([58567, 31240, 35507])
+  const { animes } = useMultipleAnimeApi([58567, 31240, 35507])
 
 
   const getBackgroundImage = () => {
@@ -45,6 +40,23 @@ const Hero: React.FC = () => {
   //   return () => clearInterval(interval);
   // }, []);
 
+  function extractAge(rating: string | undefined) {
+    if (!rating) return "N/A";
+    // ตัวอย่าง: "PG-13 - Teens 13 or older"
+    const match = rating.match(/(\d{1,2})\s*\+/) // ตรงกับ "13+" "17+" ฯลฯ
+      || rating.match(/(\d{1,2})\s*or older/)   // ตรงกับ "13 or older"
+      || rating.match(/(\d{1,2})\s*\+/)         // ตรงกับ "13+"
+      || rating.match(/(\d{1,2})/)              // ตรงกับ "13" "17" เฉยๆ
+    ;
+    if (match) {
+      return `${match[1]}+`;
+    }
+    // กรณีพิเศษ
+    if (rating.includes("All Ages")) return "ทุกวัย";
+    if (rating.includes("G")) return "ทุกวัย";
+    return "N/A";
+  }
+
   return (
     <main
       className={`mx-auto w-4/4 lg:w-full h-full flex justify-center items-center transition-all ease duration-400 
@@ -65,22 +77,28 @@ const Hero: React.FC = () => {
           <div className="w-full md:w-2/5 flex flex-col items-center justify-center md:items-start md:justify-start">
             <p className="text-sm text-[#9b9ba0] w-full h-full ">
               <span className="text-white inline-block px-[5px] bg-[#34373e] -skew-x-12 mb-3 lg:mb-5">
-                16+
-              </span>{" "}
-              • Sub | Dub • Action, Adventure, Fantasy
+                {imageIndex === 1 ? extractAge(animes?.[58567]?.rating) : imageIndex === 2 ? extractAge(animes?.[31240]?.rating) : extractAge(animes?.[35507]?.rating)}
+              </span>{" • Sub | Dub • "}
+              {imageIndex === 1 ? (
+                animes?.[58567]?.genres?.map((genre) => genre.name).join(' ,')
+              ) : imageIndex === 2 ? (
+                animes?.[31240]?.genres?.map((genre) => genre.name).join(' ,')
+              ) : (
+                animes?.[35507]?.genres?.map((genre) => genre.name).join(' ,')
+              )}
             </p>
             <div className="hidden lg:block h-[97px]">
               {imageIndex === 1 ? (
                 <p className="text-base text-white text-justify line-clamp-4">
-                    {Sololeveling?.synopsis}
+                  {animes?.[58567]?.synopsis}
                 </p>
               ) : imageIndex === 2 ? (
                 <p className="text-base text-white text-justify line-clamp-4">
-                  {Rezero?.synopsis}
+                  {animes?.[31240]?.synopsis}
                 </p>
               ) : (
                 <p className="text-base text-white text-justify line-clamp-4">
-                  {Classroom?.synopsis}
+                  {animes?.[35507]?.synopsis}
                 </p>
               )}
             </div>
