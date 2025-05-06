@@ -4,7 +4,6 @@ import { useAppContext } from '@/context/AppContext'
 import { v4 as uuidv4 } from 'uuid'
 import Loading from '@/components/Loading'
 import { Link } from 'react-router-dom'
-import Error from '@/components/Error'
 
 const New: React.FC = () => {
   const { searchTerm, loading } = useAppContext()

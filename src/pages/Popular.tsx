@@ -11,18 +11,18 @@ const New: React.FC = () => {
   const { animeList, isError } = useAnimeApi(searchTerm)
 
   return (
-    <div className=' bg-black'>
-      <div className='mx-auto text-white container max-w-7/12'>
+    <div>
+      <div className='mx-auto text-white container'>
         <h1 className='text-3xl my-12'>Popular Anime</h1>
-        <div className='grid grid-cols-6 gap-6'>
+        <div className='grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-6'>
           {loading ? (
             <Loading />
           ) : isError ? (
             <Error />
           ) : (animeList.map(({ mal_id, images, title_english, title }) => (
             <Link to={`/watch/${mal_id}`} key={`${mal_id}-${uuidv4()}`}>
-              <div className='w-[150px] h-[220px]'>
-                <img src={images.jpg.image_url} alt={title_english || title} className='w-full h-full object-cover' />
+              <div className='w-full h-auto'>
+                <img src={images.jpg.image_url} alt={title_english || title} className='w-full h-auto aspect-[2/3] object-cover' />
               </div>
               <h2 className='text-sm line-clamp-3'>{title_english || title}</h2>
             </Link>

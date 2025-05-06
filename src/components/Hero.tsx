@@ -42,16 +42,14 @@ const Hero: React.FC = () => {
 
   function extractAge(rating: string | undefined) {
     if (!rating) return "N/A";
-    // ตัวอย่าง: "PG-13 - Teens 13 or older"
-    const match = rating.match(/(\d{1,2})\s*\+/) // ตรงกับ "13+" "17+" ฯลฯ
-      || rating.match(/(\d{1,2})\s*or older/)   // ตรงกับ "13 or older"
-      || rating.match(/(\d{1,2})\s*\+/)         // ตรงกับ "13+"
-      || rating.match(/(\d{1,2})/)              // ตรงกับ "13" "17" เฉยๆ
+    const match = rating.match(/(\d{1,2})\s*\+/)
+      || rating.match(/(\d{1,2})\s*or older/)
+      || rating.match(/(\d{1,2})\s*\+/)
+      || rating.match(/(\d{1,2})/)
     ;
     if (match) {
       return `${match[1]}+`;
     }
-    // กรณีพิเศษ
     if (rating.includes("All Ages")) return "ทุกวัย";
     if (rating.includes("G")) return "ทุกวัย";
     return "N/A";
@@ -103,6 +101,8 @@ const Hero: React.FC = () => {
               )}
             </div>
             <div className='w-full min-w-[200px] md:max-w-[200px] md:w-2/5 text-black text-[16px] cursor-pointer py-1 pr-5 pl-2 mt-4 font-bold tracking-wide bg-[#ff640a] hover:bg-[#ff7b2e] transition-all'>
+
+              {/* ลิ้งค์ไป Anime เรื่องอื่นโดยใช้ Link ตรงนี้ */}
               <Link to={`/watch/58567`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
                 <img
                   className="w-8 h-8 "
