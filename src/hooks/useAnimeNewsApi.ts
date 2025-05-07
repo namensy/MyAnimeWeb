@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/context/AppContext";
 
-// ประเภทข้อมูลสำหรับข่าวอนิเมะ
 interface AnimeNewsItem {
   mal_id: number;
   url: string;
@@ -36,20 +35,15 @@ export const useAnimeNewsApi = (animeId: string | undefined) => {
 
   const getAnimeNews = async () => {
     if (!animeId) return;
-    
     setLoading(true);
     setIsError(false);
     setErrorMessage("");
-    
     try {
-      // ดึงข้อมูลข่าวจาก API ด้วย ID ของอนิเมะ
       const endpoint = await axios.get<AnimeNewsResponse>(
         `https://api.jikan.moe/v4/anime/${animeId}/news`
       );
-      
       const { data } = endpoint;
-      
-      // บันทึกข้อมูลข่าวที่ได้รับ
+
       setAnimeNews(data.data);
     } catch (error) {
       console.error("Error fetching anime news:", error);

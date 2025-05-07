@@ -59,22 +59,8 @@ export const useAnimeApi = (searchTerm: string | string[]) => {
 
   useEffect(() => {
     getMovieApi();
-    // getNewMovieApi();
   }, [debouncedText, id]);
 
-  // For API testing purposes
-  // const getNewMovieApi = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const endpoint = await axios.get('https://api.jikan.moe/v4/anime/58567');
-  //     const { data: { data } } = endpoint;
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log('Error', error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   return { animeList, loading, getMovieApi };
 };
