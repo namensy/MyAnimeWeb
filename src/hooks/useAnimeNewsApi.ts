@@ -43,7 +43,8 @@ export const useAnimeNewsApi = (animeId: string | undefined) => {
         `https://api.jikan.moe/v4/anime/${animeId}/news`
       );
       const { data } = endpoint;
-
+      
+      // บันทึกข้อมูลข่าวที่ได้รับ
       setAnimeNews(data.data);
     } catch (error) {
       console.error("Error fetching anime news:", error);
@@ -59,7 +60,6 @@ export const useAnimeNewsApi = (animeId: string | undefined) => {
   };
 
   useEffect(() => {
-    // ดึงข้อมูลข่าวเมื่อ ID ของอนิเมะมีการเปลี่ยนแปลง
     getAnimeNews();
   }, [animeId]);
 
@@ -68,6 +68,6 @@ export const useAnimeNewsApi = (animeId: string | undefined) => {
     isError, 
     errorMessage, 
     getAnimeNews,
-    refreshNews: getAnimeNews // ฟังก์ชันสำหรับรีเฟรชข้อมูลข่าวในกรณีที่ต้องการ
+    refreshNews: getAnimeNews
   };
 }; 

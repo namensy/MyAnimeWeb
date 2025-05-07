@@ -16,13 +16,13 @@ const New: React.FC = () => {
         <div className='grid grid-cols-6 gap-6'>
           {loading ? (
             <Loading />
-          ) : (
+          )  : (
             animeList.map((item) => (
               <Link to={`/watch/${item.mal_id}`} key={`${item.mal_id}-${uuidv4()}`}>
                 <div className='w-[150px] h-[220px]'>
-                  <img src={item.images.jpg.image_url} alt={item.title} className='w-full h-full object-cover' />
+                  <img src={item.images.jpg.image_url} alt={item.title_english} className='w-full h-full object-cover' />
                 </div>
-                <h2 className='text-sm line-clamp-3'>{item.title}</h2>
+                <h2 className='text-sm line-clamp-3'>{item.title_english}</h2>
               </Link>
             ))
           )}
