@@ -7,6 +7,7 @@ import { formatSiUnit } from "format-si-unit"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import Loading from '@/components/Loading';
+import { Link } from 'react-router-dom';
 
 const Allmovies: React.FC = () => {
   const { searchTerm, loading } = useAppContext()
@@ -51,7 +52,7 @@ const Allmovies: React.FC = () => {
               <Loading />
             ) : (
               animeList?.map((items) => (
-                <div key={`${items.mal_id}-${uuid()}`} className="w-full h-auto relative rounded-sm mt-5 ">
+                <Link key={`${items.mal_id}-${uuid()}`} to={`/watch/${items.mal_id}`} className="w-full h-auto relative rounded-sm mt-5 ">
                   <div className="w-full aspect-[2/3] hover:bg-opacity-75 transition-all duration-300 ease-in-out">
                     <img src={items.images.webp.image_url} alt="image" decoding='async' loading='lazy' className="block w-full h-full mx-auto rounded-sm object-cover" />
                   </div>
@@ -66,14 +67,14 @@ const Allmovies: React.FC = () => {
                     </div>
                     <div className='absolute bottom-4 left-4 flex gap-4'>
                       <div className="relative group">
-                        <FontAwesomeIcon icon={faPlay} className='text-xl text-orange-500' />
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play mr-2 h-5 w-5 text-orange-500 text-xl"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
                         <span className="absolute transform left-1/2 -translate-x-1/2 -translate-y-3/2 bg-[#535364] text-white text-sm lg:text-defualt rounded py-3 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                           Play
                           <span className="absolute transform left-1/2 -translate-x-1/2 translate-y-7 lg:translate-y-6 bg-[#535364] w-2 h-2 lg:w-4 lg:h-4   rotate-45" />
                         </span>
                       </div>
                       <div className="relative group">
-                        <FontAwesomeIcon icon={faBookmark} className='text-orange-500 text-xl' />
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bookmark h-5 w-5 text-orange-500 text-xl"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>
                         <span className="absolute transform left-1/2 -translate-x-1/2 -translate-y-3/2 bg-[#535364] text-white text-sm lg:text-defualt rounded py-3 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                           Add to Watchlist
                           <span className="absolute transform left-1/2 -translate-x-1/2 translate-y-7 lg:translate-y-6 bg-[#535364] w-2 h-2 lg:w-4 lg:h-4   rotate-45" />
@@ -81,7 +82,7 @@ const Allmovies: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))
             )}
           </div>
