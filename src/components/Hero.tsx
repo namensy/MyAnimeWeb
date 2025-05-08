@@ -46,7 +46,7 @@ const Hero: React.FC = () => {
       || rating.match(/(\d{1,2})\s*or older/)
       || rating.match(/(\d{1,2})\s*\+/)
       || rating.match(/(\d{1,2})/)
-    ;
+      ;
     if (match) {
       return `${match[1]}+`;
     }
@@ -54,6 +54,14 @@ const Hero: React.FC = () => {
     if (rating.includes("G")) return "ทุกวัย";
     return "N/A";
   }
+
+  const animeIdMap: Record<number, number> = {
+    1: 58567,
+    2: 31240,
+    3: 35507,
+  };
+
+  const animeId = animeIdMap[imageIndex as keyof typeof animeIdMap] || 35507;
 
   return (
     <main
@@ -101,11 +109,9 @@ const Hero: React.FC = () => {
               )}
             </div>
             <div className='w-full min-w-[200px] md:max-w-[200px] md:w-2/5 text-black text-[16px] cursor-pointer py-1 pr-5 pl-2 mt-4 font-bold tracking-wide bg-[#ff640a] hover:bg-[#ff7b2e] transition-all'>
-
-              {/* ลิ้งค์ไป Anime เรื่องอื่นโดยใช้ Link ตรงนี้ */}
-              <Link to={`/watch/58567`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
+              <Link to={`/watch/${animeId}`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
                 <img
-                  className="w-8 h-8 "
+                  className="w-8 h-8"
                   src={icons.caret_right}
                   alt="caret right"
                 />
