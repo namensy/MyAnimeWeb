@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
   };
 
   const handleResize = () => {
-    setBackgroundImage(getBackgroundImage() as string)
+    setBackgroundImage(getBackgroundImage() ?? '')
   }
 
   useEffect(() => {
@@ -55,14 +55,6 @@ const Hero: React.FC = () => {
     return "N/A";
   }
 
-  const animeIdMap: Record<number, number> = {
-    1: 58567,
-    2: 31240,
-    3: 35507,
-  };
-
-  const animeId = animeIdMap[imageIndex as keyof typeof animeIdMap] || 35507;
-
   return (
     <main
       className={`mx-auto w-4/4 lg:w-full h-full flex justify-center items-center transition-all ease duration-400 
@@ -83,33 +75,19 @@ const Hero: React.FC = () => {
           <div className="w-full md:w-2/5 flex flex-col items-center justify-center md:items-start md:justify-start">
             <p className="text-sm text-[#9b9ba0] w-full h-full ">
               <span className="text-white inline-block px-[5px] bg-[#34373e] -skew-x-12 mb-3 lg:mb-5">
-                {imageIndex === 1 ? extractAge(animes?.[58567]?.rating) : imageIndex === 2 ? extractAge(animes?.[31240]?.rating) : extractAge(animes?.[35507]?.rating)}
+                {extractAge(animes?.[animesId]?.rating)}
               </span>{" • Sub | Dub • "}
-              {imageIndex === 1 ? (
-                animes?.[58567]?.genres?.map((genre) => genre.name).join(' ,')
-              ) : imageIndex === 2 ? (
-                animes?.[31240]?.genres?.map((genre) => genre.name).join(' ,')
-              ) : (
-                animes?.[35507]?.genres?.map((genre) => genre.name).join(' ,')
-              )}
+              {animes?.[animesId]?.genres?.map(genre => (genre.name)).join(' ,')}
             </p>
             <div className="hidden lg:block h-[97px]">
-              {imageIndex === 1 ? (
-                <p className="text-base text-white text-justify line-clamp-4">
-                  {animes?.[58567]?.synopsis}
-                </p>
-              ) : imageIndex === 2 ? (
-                <p className="text-base text-white text-justify line-clamp-4">
-                  {animes?.[31240]?.synopsis}
-                </p>
-              ) : (
-                <p className="text-base text-white text-justify line-clamp-4">
-                  {animes?.[35507]?.synopsis}
-                </p>
-              )}
+              <p className="text-base text-white text-justify line-clamp-4">
+                {animes?.[animesId]?.synopsis}
+              </p>
             </div>
             <div className='w-full min-w-[200px] md:max-w-[200px] md:w-2/5 text-black text-[16px] cursor-pointer py-1 pr-5 pl-2 mt-4 font-bold tracking-wide bg-[#ff640a] hover:bg-[#ff7b2e] transition-all'>
-              <Link to={`/watch/${animeId}`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
+
+              {/* ลิ้งค์ไป Anime เรื่องอื่นโดยใช้ Link ตรงนี้ */}
+              <Link to={`/watch/58567`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
                 <img
                   className="w-8 h-8"
                   src={icons.caret_right}
