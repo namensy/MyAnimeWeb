@@ -55,14 +55,6 @@ const Hero: React.FC = () => {
     return "N/A";
   }
 
-  const animeId: Record<number, number> = {
-    1: 58567,
-    2: 31240,
-    3: 35507
-  } as const
-
-  const animesId = animeId[imageIndex as keyof typeof animeId]
-
   return (
     <main
       className={`mx-auto w-4/4 lg:w-full h-full flex justify-center items-center transition-all ease duration-400 
@@ -95,7 +87,7 @@ const Hero: React.FC = () => {
             <div className='w-full min-w-[200px] md:max-w-[200px] md:w-2/5 text-black text-[16px] cursor-pointer py-1 pr-5 pl-2 mt-4 font-bold tracking-wide bg-[#ff640a] hover:bg-[#ff7b2e] transition-all'>
               <Link to={`/watch/${animesId}`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
                 <img
-                  className="w-8 h-8 "
+                  className="w-8 h-8"
                   src={icons.caret_right}
                   alt="caret right"
                 />
