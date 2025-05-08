@@ -55,6 +55,14 @@ const Hero: React.FC = () => {
     return "N/A";
   }
 
+  const animeId: Record<number, number> = {
+    1: 58567,
+    2: 31240,
+    3: 35507
+  } as const
+
+  const animesId = animeId[imageIndex as keyof typeof animeId]
+
   return (
     <main
       className={`mx-auto w-4/4 lg:w-full h-full flex justify-center items-center transition-all ease duration-400 
