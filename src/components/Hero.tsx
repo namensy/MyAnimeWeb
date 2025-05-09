@@ -93,9 +93,7 @@ const Hero: React.FC = () => {
               </p>
             </div>
             <div className='w-full min-w-[200px] md:max-w-[200px] md:w-2/5 text-black text-[16px] cursor-pointer py-1 pr-5 pl-2 mt-4 font-bold tracking-wide bg-[#ff640a] hover:bg-[#ff7b2e] transition-all'>
-
-              {/* ลิ้งค์ไป Anime เรื่องอื่นโดยใช้ Link ตรงนี้ */}
-              <Link to={`/watch/58567`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
+              <Link to={`/watch/${animesId}`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
                 <img
                   className="w-8 h-8"
                   src={icons.caret_right}
