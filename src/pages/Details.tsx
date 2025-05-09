@@ -116,7 +116,7 @@ const Details = () => {
                   <h3 className="font-semibold mb-2">Producers</h3>
                   <div className="flex flex-wrap gap-2">
                     {producers.map((producer) => (
-                      <button key={producer.mal_id} className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp_svg]:pointer-events-none [&amp_svg_svg]:size-4 [&amp_svg_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 rounded-full">{producer.name}</button>
+                      <button type="button" key={producer.mal_id} className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp_svg]:pointer-events-none [&amp_svg_svg]:size-4 [&amp_svg_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 rounded-full">{producer.name}</button>
                     ))}
                   </div>
                 </div>
@@ -177,7 +177,7 @@ const Details = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play mr-2 h-5 w-5"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
                     Trailer</h2>
                   <div>
-                    {showVideo && trailer.embed_url ? <iframe loading="lazy" width="100%" height="auto" src={trailer.embed_url} className="aspect-video mx-auto lg:max-w-7/12" allowFullScreen ></iframe> : 'Trailer not avaliable'}
+                    {showVideo && trailer.embed_url ? <iframe title="trailer" width="100%" height="auto" src={trailer.embed_url} className="aspect-video mx-auto lg:max-w-7/12" allowFullScreen ></iframe> : 'Trailer not avaliable'}
                   </div>
                 </div>
                 <div>

@@ -7,6 +7,7 @@ import { formatSiUnit } from "format-si-unit"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import Loading from '@/components/Loading';
+import { Link } from 'react-router-dom';
 
 const Allmovies: React.FC = () => {
   const { searchTerm, loading } = useAppContext()
@@ -51,7 +52,7 @@ const Allmovies: React.FC = () => {
               <Loading />
             ) : (
               animeList?.map((items) => (
-                <div key={`${items.mal_id}-${uuid()}`} className="w-full h-auto relative rounded-sm mt-5 ">
+                <Link key={`${items.mal_id}-${uuid()}`} to={`/watch/${items.mal_id}`} className="w-full h-auto relative rounded-sm mt-5 ">
                   <div className="w-full aspect-[2/3] hover:bg-opacity-75 transition-all duration-300 ease-in-out">
                     <img src={items.images.webp.image_url} alt="image" decoding='async' loading='lazy' className="block w-full h-full mx-auto rounded-sm object-cover" />
                   </div>
@@ -81,7 +82,7 @@ const Allmovies: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))
             )}
           </div>
