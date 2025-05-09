@@ -61,7 +61,14 @@ const Hero: React.FC = () => {
     3: 35507,
   };
 
-  const animesId = animeIdMap[imageIndex as keyof typeof animeIdMap] || 35507;
+  const animeBgMap: Record<number, string> = {
+    1: backgrounds.qwerty,
+    2: backgrounds.retext,
+    3: backgrounds.cote_text
+  }
+
+  const animesId = animeIdMap[imageIndex] || 35507;
+  const animesBg = animeBgMap[imageIndex];
 
   return (
     <main
@@ -72,13 +79,18 @@ const Hero: React.FC = () => {
       <div className="w-full h-full text-9xl double-gradient lg:pt-70">
         <div className="flex flex-col justify-center items-center md:items-start md:justify-start container max-w-11/12 mx-auto">
           <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] md:mt-20 lg:mt-0 mb-5 lg:mb-10 ">
-            {imageIndex === 1 ? (
-              <img src={backgrounds.qwerty} alt="Sololeveling text" className='inline-block w-full h-full' decoding='async' loading='lazy' />
-            ) : imageIndex === 2 ? (
-              <img src={backgrounds.retext} className="inline-block w-full h-full mt-10" alt="Rezero text" decoding='async' loading='lazy' />
-            ) : (
-              <img className=" inline-block w-full h-full mt-30" src={backgrounds.cote_text} alt="Cote text" decoding='async' loading='lazy' />
-            )}
+            <div className='h-[200px]'>
+              {animeBgMap.map((bg) => (
+                <img src={animesBg} alt={animesBg} />
+              ))}
+              {/* {imageIndex === 1 ? (
+                <img src={backgrounds.qwerty} alt="Sololeveling text" className='inline-block w-full h-full' decoding='async' loading='lazy' />
+              ) : imageIndex === 2 ? (
+                <img src={backgrounds.retext} className="inline-block w-full h-full" alt="Rezero text" decoding='async' loading='lazy' />
+              ) : (
+                <img className="inline-block w-full h-full" src={backgrounds.cote_text} alt="Cote text" decoding='async' loading='lazy' />
+              )} */}
+            </div>
           </div>
           <div className="w-full md:w-2/5 flex flex-col items-center justify-center md:items-start md:justify-start">
             <p className="text-sm text-[#9b9ba0] w-full h-full ">
@@ -93,12 +105,8 @@ const Hero: React.FC = () => {
               </p>
             </div>
             <div className='w-full min-w-[200px] md:max-w-[200px] md:w-2/5 text-black text-[16px] cursor-pointer py-1 pr-5 pl-2 mt-4 font-bold tracking-wide bg-[#ff640a] hover:bg-[#ff7b2e] transition-all'>
-              <Link to={`/watch/${animesId}`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer">
-                <img
-                  className="w-8 h-8"
-                  src={icons.caret_right}
-                  alt="caret right"
-                />
+              <Link to={`/watch/${animesId}`} className="w-full h-full flex justify-center items-center gap-1 cursor-pointer p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play mr-2 h-5 w-5 text-black text-xl"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
                 <p className='text-black text-sm'>START WATCHING</p>
               </Link>
             </div>

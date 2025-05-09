@@ -58,26 +58,26 @@ const Allmovies: React.FC = () => {
                   </div>
                   <p className="line-clamp-1 w-full text-white whitespace-normal mt-2 text-sm">{items.title}</p>
                   <p className="text-[#9d9d9d] text-sm">{items.year ? items.year : 'No-info'}</p>
-                  <div className='absolute top-2 right-0 w-full h-full opacity-0 hover:opacity-95 hover:bg-[#17161c] transition-opacity duration-100 hover:scale-105'>
+                  <div className='absolute top-2 right-0 w-full h-full p-1 opacity-0 hover:opacity-95 hover:bg-[#17161c] transition-opacity duration-100 hover:scale-105'>
                     <div className='whitespace-normal text-white text-sm line-clamp-10 md:line-clamp-8 lg:line-clamp-6 m-2 select-none'>
                       <p className='mb-2'>{items.title}</p>
                       <p className='text-[#9d9d9d]'>{`${items.score} ★ (${formatSiUnit(items.scored_by)})`}</p>
                       <p className='text-[#9d9d9d]'>{`${items.episodes} episodes`}</p>
                       <p className='mt-2'>{items.synopsis}</p>
                     </div>
-                    <div className='absolute bottom-4 left-4 flex gap-4'>
+                    <div className='absolute bottom-4 left-4 flex gap-2 mb-4'>
                       <div className="relative group">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play mr-2 h-5 w-5 text-orange-500 text-xl"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                        <span className="absolute transform left-1/2 -translate-x-1/2 -translate-y-3/2 bg-[#535364] text-white text-sm lg:text-defualt rounded py-3 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <span className="absolute transform left-2 -translate-x-1/2 -translate-y-4/2 bg-[#535364] text-white text-sm lg:text-default rounded py-3 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                           Play
-                          <span className="absolute transform left-1/2 -translate-x-1/2 translate-y-7 lg:translate-y-6 bg-[#535364] w-2 h-2 lg:w-4 lg:h-4   rotate-45" />
+                          <span className="absolute transform left-1/2 -translate-x-1/2 translate-y-7 lg:translate-y-6 bg-[#535364] w-2 h-2 lg:w-4 lg:h-4 rotate-45" />
                         </span>
                       </div>
                       <div className="relative group">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bookmark h-5 w-5 text-orange-500 text-xl"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>
-                        <span className="absolute transform left-1/2 -translate-x-1/2 -translate-y-3/2 bg-[#535364] text-white text-sm lg:text-defualt rounded py-3 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <span className="absolute transform left-1/2 -translate-x-1/2 -translate-y-4/2 bg-[#535364] text-white text-sm lg:text-default rounded py-3 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-nowrap ">
                           Add to Watchlist
-                          <span className="absolute transform left-1/2 -translate-x-1/2 translate-y-7 lg:translate-y-6 bg-[#535364] w-2 h-2 lg:w-4 lg:h-4   rotate-45" />
+                          <span className="absolute transform left-1/2 -translate-x-1/2 translate-y-7 lg:translate-y-6 bg-[#535364] w-2 h-2 lg:w-4 lg:h-4 rotate-45" />
                         </span>
                       </div>
                     </div>
