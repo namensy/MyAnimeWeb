@@ -1,5 +1,5 @@
 import { logos } from '@/assets/images/logos'
-import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
+import { SignUp, useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '@/context/AppContext';
 import { useState } from 'react';
@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
       </div>
       <div className='hidden lg:block transition-transform text-white mr-10'>
         {user ?
-          <div className='w-full h-full flex items-center gap-4 '>
+          <div className='w-full h-full flex items-center gap-4  '>
             <div className='p-5.5 cursor-pointer transition-transform hover:-translate-y-0 hover:bg-[#141519]'>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bookmark h-5 w-5"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>
             </div>
@@ -47,11 +47,24 @@ const Navbar: React.FC = () => {
       </div>
       {/* {For phone} */}
       <div className='lg:hidden w-full'>
-        <div className='flex items-center  m-[8.5px] w-full h-full pl-4'>
-          <div className='cursor-pointer '><img src={icons.interface_icon} onClick={() => handleOpen(isOpen)} alt="interface icon" className='object-contain w-5 h-5' /></div>
-          <Link to="/" className='hover:text-white cursor-pointer'>
-            <img src={logos.anivibe} alt="AniVibe logo" className='object-contain p-2 w-18' />
+        <div className='flex items-center justify-between m-[8.5px] w-full h-full pl-4'>
+          <div className='cursor-pointer' onClick={() => handleOpen(isOpen)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu h-5 w-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+          </div>
+          <Link to="/" className='hover:text-white cursor-pointer flex-1'>
+            <img src={logos.anivibe} alt="AniVibe logo" className='object-contain ml-2 p-2 w-12' />
           </Link>
+          <div className='flex items-center gap-4 mr-10'>
+            {user ?
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bookmark h-5 w-5"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>
+                <UserButton />
+              </>
+              : <button onClick={() => openSignIn()} className='gap-3'>
+                Create Account
+              </button>
+            }
+          </div>
         </div>
         <div className={`${isOpen && window.innerWidth < 1024 ? 'block' : 'hidden'} absolute flex flex-col items-center justify-between top-16 gap-5 bg-[#23252b] pr-35 pb-10`}>
           <Link to="/videos/new" className='ml-1 mt-5'>

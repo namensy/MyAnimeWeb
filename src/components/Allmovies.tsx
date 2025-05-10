@@ -60,10 +60,10 @@ const Allmovies: React.FC = () => {
                   <p className="text-[#9d9d9d] text-sm">{items.year ? items.year : 'No-info'}</p>
                   <div className='absolute top-2 right-0 w-full h-full p-1 opacity-0 hover:opacity-95 hover:bg-[#17161c] transition-opacity duration-100 hover:scale-105'>
                     <div className='whitespace-normal text-white text-sm line-clamp-10 md:line-clamp-8 lg:line-clamp-6 m-2 select-none'>
-                      <p className='mb-2'>{items.title}</p>
-                      <p className='text-[#9d9d9d]'>{`${items.score} ★ (${formatSiUnit(items.scored_by)})`}</p>
+                      <p className='mb-2 text-nowrap'>{items.title}</p>
+                      <p className='text-[#9d9d9d] '>{`${items.score} ★ (${formatSiUnit(items.scored_by)})`}</p>
                       <p className='text-[#9d9d9d]'>{`${items.episodes} episodes`}</p>
-                      <p className='mt-2'>{items.synopsis}</p>
+                      <p className='mt-2 line-clamp-4 '>{items.synopsis}</p>
                     </div>
                     <div className='absolute bottom-4 left-4 flex gap-2 mb-4'>
                       <div className="relative group">

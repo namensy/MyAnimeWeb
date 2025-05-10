@@ -70,6 +70,8 @@ const Hero: React.FC = () => {
   const animesId = animeIdMap[imageIndex] || 35507;
   const animesBg = animeBgMap[imageIndex];
 
+  
+
   return (
     <main
       className={`mx-auto w-4/4 lg:w-full h-full flex justify-center items-center transition-all ease duration-400 
@@ -80,16 +82,7 @@ const Hero: React.FC = () => {
         <div className="flex flex-col justify-center items-center md:items-start md:justify-start container max-w-11/12 mx-auto">
           <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] md:mt-20 lg:mt-0 mb-5 lg:mb-10 ">
             <div className='h-[200px]'>
-              {animeBgMap.map((bg) => (
-                <img src={animesBg} alt={animesBg} />
-              ))}
-              {/* {imageIndex === 1 ? (
-                <img src={backgrounds.qwerty} alt="Sololeveling text" className='inline-block w-full h-full' decoding='async' loading='lazy' />
-              ) : imageIndex === 2 ? (
-                <img src={backgrounds.retext} className="inline-block w-full h-full" alt="Rezero text" decoding='async' loading='lazy' />
-              ) : (
-                <img className="inline-block w-full h-full" src={backgrounds.cote_text} alt="Cote text" decoding='async' loading='lazy' />
-              )} */}
+              <img src={animesBg} alt={animesBg} decoding='async' loading='lazy' />
             </div>
           </div>
           <div className="w-full md:w-2/5 flex flex-col items-center justify-center md:items-start md:justify-start">
