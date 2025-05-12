@@ -12,14 +12,14 @@ const New: React.FC = () => {
 
   return (
     <div>
-      <div className='mx-auto text-white container lg:max-w-11/12 xl:max-w-10/12'>
+      <div className='container mx-auto text-white lg:max-w-11/12 xl:max-w-9/12'>
         <h1 className='text-3xl my-12'>Newly Added Anime</h1>
         {loading ? (
           <Loading />
         ) : isError ? (
           <Error />
         ) : (
-          <div className='grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-6'>
+          <div className='grid grid-cols-3 md:grid-cols-5 xl:grid-cols-6 gap-6'>
             {animeList.map(({ mal_id, images, title_english, title}) => (
               <Link to={`/watch/${mal_id}`} key={`${mal_id}-${uuidv4()}`}>
                 <div className='w-full h-auto'>

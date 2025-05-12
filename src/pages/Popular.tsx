@@ -12,9 +12,9 @@ const New: React.FC = () => {
 
   return (
     <div>
-      <div className='container mx-auto text-white lg:max-w-11/12 xl:max-w-10/12'>
+      <div className='container mx-auto text-white lg:max-w-11/12 xl:max-w-9/12'>
         <h1 className='text-3xl my-12'>Popular Anime</h1>
-        <div className='grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-6'>
+        <div className='grid grid-cols-3 md:grid-cols-5 xl:grid-cols-6 gap-6'>
           {loading ? (
             <Loading />
           ) : isError ? (
