@@ -15,17 +15,13 @@
   * {
     font-family: Outfit, sans-serif;
   }
-
-  /* ซ่อน scrollbar แนวนอน */
   ::-webkit-scrollbar {
-    width: 10px; /* scrollbar แนวตั้ง */
-    height: 0; /* scrollbar แนวนอน */
+    width: 10px;
+    height: 0;
   }
-  /* ปรับแต่ง track (พื้นหลัง) */
   ::-webkit-scrollbar-track {
     background: black;
   }
-  /* ปรับแต่ง thumb (ตัวเลื่อน) */
   ::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 5px;

@@ -1,15 +1,12 @@
 import { v4 as uuid } from 'uuid';
 import { useState } from "react";
-import { icons } from "@/assets/images";
 import { useAnimeApi } from "@/hooks/useAnimeApi";
 import { useAppContext } from '@/context/AppContext';
 import { formatSiUnit } from "format-si-unit"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import Loading from '@/components/Loading';
 import { Link } from 'react-router-dom';
 
-const Allmovies: React.FC = () => {
+const AllMovies: React.FC = () => {
   const { searchTerm, loading } = useAppContext()
   const [currentIndex, setCurrentIndex] = useState(0)
   const itemsPerPage = 6;
@@ -40,7 +37,7 @@ const Allmovies: React.FC = () => {
       <div className={`absolute right-0 bottom-82 md:bottom-51 lg:bottom-21 cursor-pointer z-10 md:py-28 lg:py-43 lg:px-3 bg-gradient-to-r from-[#00000088] from-100% to-transparent ${currentIndex === 18 ? 'hidden' : ''}`} onClick={handleRightClick}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right size-8 text-neutral-300 cursor-pointer"><path d="m9 18 6-6-6-6"></path></svg>
       </div>
-      <div className=" container w-11/12 mt-15 absolute left-4 sm:left-8 lg:left-12 xl:left-16 2xl:left-20 ">
+      <div className="container w-11/12 mt-15 absolute left-4 sm:left-8 lg:left-12 xl:left-16 2xl:left-20 ">
         <h1 className=" text-3xl font-bold tracking-wide">Anime Watchlist</h1>
         <p className="text-[#9d9d9d]">Unwind this weekend with your top anime picks</p>
         <div className="w-screen overflow-hidden relative">
@@ -93,4 +90,4 @@ const Allmovies: React.FC = () => {
   );
 };
 
-export default Allmovies;
+export default AllMovies;

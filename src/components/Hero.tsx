@@ -33,12 +33,12 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setImageIndex((prev) => (prev === 3 ? 1 : prev + 1));
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setImageIndex((prev) => (prev === 3 ? 1 : prev + 1));
+  //   }, 10000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   function extractAge(rating: string | undefined) {
     if (!rating) return "N/A";
@@ -70,8 +70,6 @@ const Hero: React.FC = () => {
   const animesId = animeIdMap[imageIndex] || 35507;
   const animesBg = animeBgMap[imageIndex];
 
-  
-
   return (
     <main
       className={`mx-auto w-4/4 lg:w-full h-full flex justify-center items-center transition-all ease duration-400 
@@ -79,7 +77,7 @@ const Hero: React.FC = () => {
       style={{ backgroundImage: `url('${getBackgroundImage()}')`, }}
     >
       <div className="w-full h-full text-9xl double-gradient lg:pt-70">
-        <div className="flex flex-col justify-center items-center md:items-start md:justify-start container max-w-11/12 mx-auto">
+        <div className="container flex flex-col justify-center items-center md:items-start md:justify-start max-w-11/12 mx-auto">
           <div className="w-4/7 md:w-3/7 lg:w-2/7 h-full mt-[330px] md:mt-20 lg:mt-0 mb-5 lg:mb-10 ">
             <div className='h-[200px]'>
               <img src={animesBg} alt={animesBg} decoding='async' loading='lazy' />
@@ -129,7 +127,6 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-
     </main>
   );
 };
