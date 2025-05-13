@@ -6,7 +6,7 @@ import { formatSiUnit } from "format-si-unit"
 import Loading from '@/components/Loading';
 import { Link } from 'react-router-dom';
 
-const AllMovies: React.FC = () => {
+const Allmovies: React.FC = () => {
   const { searchTerm, loading } = useAppContext()
   const [currentIndex, setCurrentIndex] = useState(0)
   const itemsPerPage = 6;
@@ -90,4 +90,4 @@ const AllMovies: React.FC = () => {
   );
 };
 
-export default AllMovies;
+export default Allmovies;

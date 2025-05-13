@@ -1,9 +1,9 @@
 import { logos } from '@/assets/images/logos'
-import { SignUp, useClerk, UserButton, useUser } from "@clerk/clerk-react";
+import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '@/context/AppContext';
 import { useState } from 'react';
-import { icons } from '@/assets/images/Icons';
+
 
 const Navbar: React.FC = () => {
   const { openSignIn } = useClerk()

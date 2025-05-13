@@ -7,7 +7,7 @@ import Popular from "./pages/Popular"
 import Search from "./pages/Search"
 import Details from "./pages/Details"
 import Footer from "./components/Footer"
-import AllMovies from "./components/AllMovies"
+import Allmovies from "./components/Allmovies"
 import ViewALllFeed from "./components/ViewAllFeed"
 
 const App: React.FC = () => {
@@ -16,7 +16,7 @@ const App: React.FC = () => {
     <div className='text-white relative bg-black min-h-screen'>
       <Navbar />
       <Routes>
-        <Route path='/' element={<> <Hero /> <AllMovies /> <ViewALllFeed /></>} />
+        <Route path='/' element={<> <Hero /> <Allmovies /> <ViewALllFeed /></>} />
         <Route path='/videos/new' element={<New />} />
         <Route path='/videos/popular' element={<Popular />} />
         <Route path='/videos/search' element={<Search />} />
