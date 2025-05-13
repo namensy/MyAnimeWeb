@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { backgrounds, icons } from '@/assets/images'
+import { backgrounds } from '@/assets/images'
 import { useMultipleAnimeApi } from '@/hooks/useMultipleAnimeApi';
 
 const Hero: React.FC = () => {

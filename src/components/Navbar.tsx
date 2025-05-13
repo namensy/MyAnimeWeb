@@ -12,14 +12,6 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
 
-  const handleSearchFocus = () => {
-    navigate('/videos/search')
-  }
-
-  const handleOpen = (isOpen: boolean) => {
-    setIsOpen(!isOpen)
-  }
-
   return (
     <nav className={`flex items-center justify-between bg-[#23252b] sticky top-0 z-10`}>
       <div className='hidden lg:flex gap-2'>
@@ -33,7 +25,7 @@ const Navbar: React.FC = () => {
         <input type="text" placeholder='Search ..' value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className='w-full placeholder-white text-white text-lg py-1 pl-4 focus:pr-72 outline-none transition-all duration-400'
-          onFocus={handleSearchFocus} />
+          onFocus={() => navigate('/videos/search')} onBlur={() => navigate('/')} />
       </div>
       <div className='hidden lg:block transition-transform text-white mr-10'>
         {user ?
@@ -48,7 +40,7 @@ const Navbar: React.FC = () => {
       {/* {For phone} */}
       <div className='lg:hidden w-full'>
         <div className='flex items-center justify-between m-[8.5px] w-full h-full pl-4'>
-          <div className='cursor-pointer' onClick={() => handleOpen(isOpen)}>
+          <div className='cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu h-5 w-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
           </div>
           <Link to="/" className='hover:text-white cursor-pointer flex-1'>
