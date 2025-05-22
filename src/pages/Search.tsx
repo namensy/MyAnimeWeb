@@ -10,19 +10,26 @@ const New: React.FC = () => {
   const { animeList } = useAnimeApi(searchTerm)
 
   return (
-    <div className=' bg-black'>
-      <div className='mx-auto text-white container max-w-7/12'>
-        <h1 className='text-3xl my-12'>Waiting for search results</h1>
-        <div className='grid grid-cols-6 gap-6'>
+    <div className="bg-black">
+      <div className="container mx-auto max-w-7/12 text-white">
+        <h1 className="my-12 text-3xl">Waiting for search results</h1>
+        <div className="grid grid-cols-6 gap-6">
           {loading ? (
             <Loading />
-          )  : (
+          ) : (
             animeList.map((item) => (
-              <Link to={`/watch/${item.mal_id}`} key={`${item.mal_id}-${uuidv4()}`}>
-                <div className='w-[150px] h-[220px]'>
-                  <img src={item.images.jpg.image_url} alt={item.title_english} className='w-full h-full object-cover' />
+              <Link
+                to={`/watch/${item.mal_id}`}
+                key={`${item.mal_id}-${uuidv4()}`}
+              >
+                <div className="h-[220px] w-[150px]">
+                  <img
+                    src={item.images.jpg.image_url}
+                    alt={item.title_english}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
-                <h2 className='text-sm line-clamp-3'>{item.title_english}</h2>
+                <h2 className="line-clamp-3 text-sm">{item.title_english}</h2>
               </Link>
             ))
           )}

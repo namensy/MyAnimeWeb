@@ -12,21 +12,28 @@ const New: React.FC = () => {
 
   return (
     <div>
-      <div className='container mx-auto text-white lg:max-w-11/12 xl:max-w-9/12'>
-        <h1 className='text-3xl my-12'>Popular Anime</h1>
-        <div className='grid grid-cols-3 md:grid-cols-5 xl:grid-cols-6 gap-6'>
+      <div className="container mx-auto text-white lg:max-w-11/12 xl:max-w-9/12">
+        <h1 className="my-12 text-3xl">Popular Anime</h1>
+        <div className="grid grid-cols-3 gap-6 md:grid-cols-5 xl:grid-cols-6">
           {loading ? (
             <Loading />
           ) : isError ? (
             <Error />
-          ) : (animeList.map(({ mal_id, images, title_english, title }) => (
-            <Link to={`/watch/${mal_id}`} key={`${mal_id}-${uuidv4()}`}>
-              <div className='w-full h-auto'>
-                <img src={images.jpg.image_url} alt={title_english || title} className='w-full h-auto aspect-[2/3] object-cover' />
-              </div>
-              <h2 className='text-sm line-clamp-3'>{title_english || title}</h2>
-            </Link>
-          ))
+          ) : (
+            animeList.map(({ mal_id, images, title_english, title }) => (
+              <Link to={`/watch/${mal_id}`} key={`${mal_id}-${uuidv4()}`}>
+                <div className="h-auto w-full">
+                  <img
+                    src={images.jpg.image_url}
+                    alt={title_english || title}
+                    className="aspect-[2/3] h-auto w-full object-cover"
+                  />
+                </div>
+                <h2 className="line-clamp-3 text-sm">
+                  {title_english || title}
+                </h2>
+              </Link>
+            ))
           )}
         </div>
       </div>

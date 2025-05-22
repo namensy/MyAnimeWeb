@@ -1,26 +1,33 @@
-import { Routes } from "react-router-dom"
-import { Route } from "react-router-dom"
-import Navbar from "./components/Navbar"
-import Hero from "./components/Hero"
-import New from "./pages/New"
-import Popular from "./pages/Popular"
-import Search from "./pages/Search"
-import Details from "./pages/Details"
-import Footer from "./components/Footer"
-import Allmovies from "./components/Allmovies"
-import ViewALllFeed from "./components/ViewAllFeed"
+import { Routes } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import New from './pages/New'
+import Popular from './pages/Popular'
+import Search from './pages/Search'
+import Details from './pages/Details'
+import Footer from './components/Footer'
+import Allmovies from './components/Allmovies'
+import ViewALllFeed from './components/ViewAllFeed'
 
 const App: React.FC = () => {
-
   return (
-    <div className='text-white relative bg-black min-h-screen'>
+    <div className="relative min-h-screen bg-black text-white">
       <Navbar />
       <Routes>
-        <Route path='/' element={<> <Hero /> <Allmovies /> <ViewALllFeed /></>} />
-        <Route path='/videos/new' element={<New />} />
-        <Route path='/videos/popular' element={<Popular />} />
-        <Route path='/videos/search' element={<Search />} />
-        <Route path='/watch/:id' element={<Details />} />
+        <Route
+          path="/"
+          element={
+            <>
+              {' '}
+              <Hero /> <Allmovies /> <ViewALllFeed />
+            </>
+          }
+        />
+        <Route path="/videos/new" element={<New />} />
+        <Route path="/videos/popular" element={<Popular />} />
+        <Route path="/videos/search" element={<Search />} />
+        <Route path="/watch/:id" element={<Details />} />
       </Routes>
       <Footer />
     </div>
