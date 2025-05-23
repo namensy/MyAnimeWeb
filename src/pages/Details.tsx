@@ -3,6 +3,9 @@ import { useAnimeNewsApi } from '@/hooks/useAnimeNewsApi'
 import { formatSiUnit } from 'format-si-unit'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
+
+
 const Details = () => {
   const { id } = useParams()
   const { animeList } = useAnimeApi(id as string)
@@ -10,6 +13,13 @@ const Details = () => {
   const [showVideo, setShowVideo] = useState(false)
   const { animeNews } = useAnimeNewsApi('16498')
   console.log('This is animeNews:', animeNews)
+
+  const handleYear = (year: string) => {
+    const regex = /\b\d{4}\b/g
+    const result = year.match(regex)
+    console.log(result);
+    return result
+  }
 
   const handleChange = () => {
     if (activeTab === 'overview') {
@@ -565,12 +575,14 @@ const Details = () => {
                       News
                     </h2>
                     <div className="grid grid-cols-1 gap-4">
-                      {animeNews &&
-                        animeNews.map((item) => (
-                          <div key={mal_id}>
-                            <h2>{item.title}</h2>
-                          </div>
-                        ))}
+                      {animeNews && animeNews.slice(0, 5).map((item) => (
+                      <div key={`mal_id_${uuidv4()}`}>
+                        <a href="http://" target="_blank" rel="noopener noreferrer" className="block hover:shadow-md p4 rounded-lg border transition-all">
+                          <h3 className="font-bold text-lg mb-2">{item.title}</h3>
+                          <div>{handleYear(item.date)}</div>
+                          </a>
+                      </div>
+                    ))}
                     </div>
                   </div>
                 </div>
