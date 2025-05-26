@@ -1,32 +1,59 @@
 import { useAnimeApi } from '@/hooks/useAnimeApi'
 import { useAnimeNewsApi } from '@/hooks/useAnimeNewsApi'
+import { useMultipleApi } from '@/hooks/useMultipleApi'
 import { formatSiUnit } from 'format-si-unit'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
-
 
 const Details = () => {
   const { id } = useParams()
   const { animeList } = useAnimeApi(id as string)
   const [activeTab, setActiveTab] = useState('overview')
   const [showVideo, setShowVideo] = useState(false)
-  const { animeNews } = useAnimeNewsApi('16498')
-  console.log('This is animeNews:', animeNews)
+  const { animeNews } = useAnimeNewsApi(id as string)
+
+  // API ที่ต้องการส่ง
+  // https://api.jikan.moe/v4/anime/9253/episodes
+  const baseURL = 'https://api.jikan.moe/v4'
+  const url = '/anime/9253/episodes'
+  useMultipleApi(baseURL, url)
+  // console.log(animeNews)
 
   const handleYear = (year: string) => {
-    const regex = /\b\d{4}\b/g
+    const regex = /\b\d{4}\b/
     const result = year.match(regex)
-    console.log(result);
     return result
   }
 
-  const handleChange = () => {
-    if (activeTab === 'overview') {
-      setShowVideo(true)
-    } else {
-      setShowVideo(false)
+  const handleMonth = (month: string) => {
+    const allMonth = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ]
+    const regex = /\b\d{2}\b/
+    const monthResult = month.match(regex)?.toString()
+
+    if (monthResult) {
+      const monthIndex = Number(monthResult) - 1
+      const monthName = allMonth[monthIndex]
+      return monthName
     }
+    return 'Unknown Month'
+  }
+
+  const handleChange = () => {
+    setShowVideo(activeTab === 'overview')
   }
 
   useEffect(() => {
@@ -575,14 +602,35 @@ const Details = () => {
                       News
                     </h2>
                     <div className="grid grid-cols-1 gap-4">
-                      {animeNews && animeNews.slice(0, 5).map((item) => (
-                      <div key={`mal_id_${uuidv4()}`}>
-                        <a href="http://" target="_blank" rel="noopener noreferrer" className="block hover:shadow-md p4 rounded-lg border transition-all">
-                          <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                          <div>{handleYear(item.date)}</div>
-                          </a>
-                      </div>
-                    ))}
+                      {animeNews &&
+                        animeNews.slice(0, 5).map((item) => (
+                          <div key={`mal_id_${uuidv4()}`}>
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block rounded-lg border p-4 transition-all hover:shadow-md"
+                            >
+                              <h3 className="mb-2 text-lg font-bold">
+                                {item.title}
+                              </h3>
+                              <div className="text-muted-foreground flex justify-between text-sm">
+                                <span>
+                                  {handleMonth(item.date)}{' '}
+                                  {handleYear(item.date)}
+                                </span>
+                                <span>
+                                  {item.author_username
+                                    ? ` by ${item.author_username}`
+                                    : ''}
+                                </span>
+                              </div>
+                              <p className="text-muted-foreground mt-2 line-clamp-2">
+                                {item.excerpt}
+                              </p>
+                            </a>
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </div>
