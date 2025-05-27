@@ -1,3 +1,4 @@
+import { API_URL } from '@/constants/api'
 import { useAnimeApi } from '@/hooks/useAnimeApi'
 import { useAnimeNewsApi } from '@/hooks/useAnimeNewsApi'
 import { useMultipleApi } from '@/hooks/useMultipleApi'
@@ -5,6 +6,7 @@ import { formatSiUnit } from 'format-si-unit'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
+import { BASE_URL } from '@/constants/api'
 
 const Details = () => {
   const { id } = useParams()
@@ -13,11 +15,20 @@ const Details = () => {
   const [showVideo, setShowVideo] = useState(false)
   const { animeNews } = useAnimeNewsApi(id as string)
 
+  const checkId = (id: string) => {
+    if (!id) {
+      return 'id is undefined'
+    } else {
+      console.log('id have value', id)
+    }
+  }
+
+  checkId(id as string)
+
   // API ที่ต้องการส่ง
   // https://api.jikan.moe/v4/anime/9253/episodes
-  const baseURL = 'https://api.jikan.moe/v4'
-  const url = '/anime/9253/episodes'
-  useMultipleApi(baseURL, url)
+  const url = `/anime/${id}/episodes`
+  // useMultipleApi(BASE_URL, url)
   // console.log(animeNews)
 
   const handleYear = (year: string) => {
