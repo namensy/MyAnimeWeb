@@ -14,21 +14,14 @@ const Details = () => {
   const [activeTab, setActiveTab] = useState('overview')
   const [showVideo, setShowVideo] = useState(false)
   const { animeNews } = useAnimeNewsApi(id as string)
+  const episodeUrl = `/anime/${id}/episodes`
+  const { data } = useMultipleApi(BASE_URL, episodeUrl)
 
-  const checkId = (id: string) => {
-    if (!id) {
-      return 'id is undefined'
-    } else {
-      console.log('id have value', id)
-    }
-  }
-
-  checkId(id as string)
+  console.log(data)
 
   // API ที่ต้องการส่ง
   // https://api.jikan.moe/v4/anime/9253/episodes
-  const url = `/anime/${id}/episodes`
-  // useMultipleApi(BASE_URL, url)
+
   // console.log(animeNews)
 
   const handleYear = (year: string) => {

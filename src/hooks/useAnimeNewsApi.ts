@@ -60,7 +60,7 @@ export const useAnimeNewsApi = (animeId: string | undefined) => {
 
   useEffect(() => {
     getAnimeNews();
-  }, [animeId]);
+  }, []);
 
   return { 
     animeNews, 
