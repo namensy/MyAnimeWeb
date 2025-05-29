@@ -25,7 +25,7 @@ export const useMultipleAnimeApi = (ids: number[]) => {
       if (axios.isAxiosError(error)) {
         setErrorMessage("Error fetching Anime ID");
       } else {
-        setErrorMessage("Error from another Error");
+        setErrorMessage("An unexpected error occurred");
       }
     } finally {
       setLoading(false);
