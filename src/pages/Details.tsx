@@ -1,4 +1,3 @@
-import { API_URL } from '@/constants/api'
 import { useAnimeApi } from '@/hooks/useAnimeApi'
 import { useAnimeNewsApi } from '@/hooks/useAnimeNewsApi'
 import { useMultipleApi } from '@/hooks/useMultipleApi'

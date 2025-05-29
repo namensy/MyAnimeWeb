@@ -2,8 +2,30 @@ import { AnimeItems, Root } from '@/types'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-export const useMultipleApi = (baseURL: string, url: string) => {
-  const [data, setData] = useState<{ [key: number]: AnimeItems }>({})
+interface Config<T> {
+  baseURL: string
+  url: string
+  data?: T
+}
+
+interface AnimeResponse {
+  title: string
+  episode: number
+}
+
+const ResultAnimeResponse = (config: Config<AnimeResponse>) => {
+  return {
+    baseURL: 'hello',
+    url: 'its me',
+    data: {
+      title: 'hi',
+      episode: 23,
+    },
+  }
+}
+
+export const useMultipleApi = (api: Config) => {
+  const [data, setData] = useState<AnimeItems[]>([])
   const [isLoading, setLoading] = useState<boolean>(false)
   const [isError, setIsError] = useState<boolean>(false)
 
@@ -16,7 +38,7 @@ export const useMultipleApi = (baseURL: string, url: string) => {
     setLoading(true)
     setIsError(false)
     try {
-      const endpoint = await axios.get(`${baseURL}${url}`)
+      const endpoint = await axios.get(`${api.baseURL}${api.url}`)
       // เราสามารถทำ Pagination ได้
       const {
         data: { data },
@@ -26,14 +48,14 @@ export const useMultipleApi = (baseURL: string, url: string) => {
       console.log('This is error', error)
     }
   }
-  
+
   useEffect(() => {
     fetchApi()
   }, [])
-  
+
   return {
     data,
     isLoading,
-    isError
+    isError,
   }
 }
