@@ -25,6 +25,13 @@ const ResultAnimeResponse = (config: Config<AnimeResponse>) => {
   }
 }
 
+enum ErrorType {
+  CLIENT_ERROR = 'CLIENT_ERROR',
+  SERVER_ERROR = 'SERVER_ERROR',
+  NETWORK_ERROR = 'NETWORK_ERROR',
+  UNKNOWN_ERROR = 'UNKNOW_ERROR',
+}
+
 const controller = new AbortController()
 const signal = controller.signal
 
@@ -49,15 +56,19 @@ export const useMultipleApi = (iknow: string, url: string) => {
       } = endpoint
       setData(data)
     } catch (error) {
-      setIsError(true)
-      setLoading(false)
-      if (axios.isAxiosError(error)) {
-        setErrorMessage(error.response?.data || error.message)
-        console.log(error.message)
-        console.log(error.response?.data)
-      } else {
-        setErrorMessage('An unexpected error occured')
-        console.log('An unexpected error occured')
+      const handleError = (error: unknown) => {
+        if (axios.isAxiosError(error)) {
+          if (!error.response) {
+            return error.message
+          }
+          if (error.response?.status >= 400 && error.response?.status < 500) {
+            return {
+              type: ErrorType.CLIENT_ERROR,
+              message: 'Client side error occurred',
+            } 
+          }
+        }
+        return ErrorType.UNKNOWN_ERROR
       }
     } finally {
       setLoading(false)
