@@ -39,7 +39,25 @@ export const useMultipleApi = (iknow: string, url: string) => {
   const [data, setData] = useState<AnimeItems[]>([])
   const [isLoading, setLoading] = useState<boolean>(false)
   const [isError, setIsError] = useState<boolean>(false)
-  const [errorMessage, setErrorMessage] = useState<String>('')
+  const [errorMessage, setErrorMessage] = useState<string>('')
+
+  const handleError = (error: any) => {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        // Request made and server responded
+        setErrorMessage('Response error:' + error.response.data)
+        return ErrorType.CLIENT_ERROR
+      } else if (error.request) {
+        // Request made but no response received
+        setErrorMessage('Request error:' + error.request)
+        return ErrorType.NETWORK_ERROR
+      }
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      setErrorMessage('Unknown error:' + error.message)
+      return ErrorType.UNKNOWN_ERROR
+    }
+  }
 
   // เราต้องการรับ Api ที่แตกต่างกันออกมา
   // ฉนั้นเราต้องรับ arg เป็นทั้ง Api แล้วก็ baseURL ของ API ก่อน
@@ -49,27 +67,14 @@ export const useMultipleApi = (iknow: string, url: string) => {
   const fetchApi = async () => {
     setLoading(true)
     try {
-      const endpoint = await axios.get(`${iknow}${url}okman`, { signal })
+      const endpoint = await axios.get(`${iknow}${url}`, { signal })
       // เราสามารถทำ Pagination ได้
       const {
         data: { data },
       } = endpoint
       setData(data)
     } catch (error) {
-      const handleError = (error: unknown) => {
-        if (axios.isAxiosError(error)) {
-          if (!error.response) {
-            return error.message
-          }
-          if (error.response?.status >= 400 && error.response?.status < 500) {
-            return {
-              type: ErrorType.CLIENT_ERROR,
-              message: 'Client side error occurred',
-            } 
-          }
-        }
-        return ErrorType.UNKNOWN_ERROR
-      }
+      handleError(error)
     } finally {
       setLoading(false)
     }
@@ -83,5 +88,6 @@ export const useMultipleApi = (iknow: string, url: string) => {
     data,
     isLoading,
     isError,
+    errorMessage,
   }
 }

@@ -2,74 +2,76 @@
 @import 'tailwindcss';
 
 :root {
-    --primary-color: #f6a53b;
-    --muted-foreground: #94a3b8;
-    --ring: hsl(46, 83%, 53%);
+  --primary-color: #f6a53b;
+  --muted-foreground: #94a3b8;
+  --ring: hsl(46, 83%, 53%);
 }
 
 [role='button'],
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @layer base {
-    * {
-        font-family: Outfit, sans-serif;
-    }
-    ::-webkit-scrollbar {
-        width: 10px;
-        height: 0;
-    }
-    ::-webkit-scrollbar-track {
-        background: black;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 5px;
-        min-height: 40px;
-        margin: 2px;
-        background-clip: content-box;
-        border: 3px solid transparent;
-    }
+  * {
+    font-family: Outfit, sans-serif;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 0;
+  }
+  ::-webkit-scrollbar-track {
+    background: black;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+    min-height: 40px;
+    margin: 2px;
+    background-clip: content-box;
+    border: 3px solid transparent;
+  }
 }
 
 @layer components {
-    .btn-style {
-        @apply w-6 h-2 cursor-pointer bg-[#9b9ba0] hover:bg-[#b34607] rounded-sm;
-    }
+  .btn-style {
+    @apply h-2 w-6 cursor-pointer rounded-sm bg-[#9b9ba0] hover:bg-[#b34607];
+  }
 }
 
 @layer utilities {
-    .ring-ring {
-        --tw-ring-color: var(--ring);
-        --tw-ring-shadow: 0 0 0 2px var(--ring);
-        box-shadow: var(--tw-ring-shadow);
-    }
-    .bg-primary {
-        background-color: var(--primary-color);
-    }
+  .ring-ring {
+    --tw-ring-color: var(--ring);
+    --tw-ring-shadow: 0 0 0 2px var(--ring);
+    box-shadow: var(--tw-ring-shadow);
+  }
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
 
-    .bg-primary-10 {
-        background-color: hsl(var(--primary-color) / 0.1);
-    }
+  .bg-primary-10 {
+    background-color: hsl(var(--primary-color) / 0.1);
+  }
 
-    .bg-primary-20 {
-        background-color: hsl(var(--primary-color) / 0.2);
-    }
-
-    .text-primary {
-        color: var(--primary-color);
-    }
-    .text-muted-foreground {
-        color: var(--muted-foreground);
-    }
-    .mobile-gradient {
-        background: linear-gradient(to top, black, transparent);
-    }
-    .double-gradient {
-        background:
-            linear-gradient(to right, #00000080, transparent),
-            linear-gradient(to top, black, transparent);
-        background-blend-mode: multiply;
-    }
+  .bg-primary-20 {
+    background-color: hsl(var(--primary-color) / 0.2);
+  }
+  .bg-muted-foreground {
+    background-color: var(--muted-foreground);
+  }
+  .text-primary {
+    color: var(--primary-color);
+  }
+  .text-muted-foreground {
+    color: var(--muted-foreground);
+  }
+  .mobile-gradient {
+    background: linear-gradient(to top, black, transparent);
+  }
+  .double-gradient {
+    background:
+      linear-gradient(to right, #00000080, transparent),
+      linear-gradient(to top, black, transparent);
+    background-blend-mode: multiply;
+  }
 }
