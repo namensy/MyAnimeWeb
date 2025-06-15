@@ -31,7 +31,7 @@ const Allmovies: React.FC = () => {
   return (
     <section className="relativ mt-11 h-[600px] w-full">
       <div
-        className={`absolute bottom-82 left-0 z-10 cursor-pointer bg-gradient-to-r from-[#00000088] from-100% to-transparent md:bottom-51 md:py-28 lg:bottom-21 lg:px-3 lg:py-43 ${currentIndex === 0 ? 'hidden' : ''}`}
+        className={`absolute bottom-232 left-0 z-10 cursor-pointer bg-gradient-to-r from-[#00000088] from-100% to-transparent md:bottom-51 md:py-28 lg:bottom-200 lg:px-3 lg:py-43 ${currentIndex === 0 ? 'hidden' : ''}`}
         onClick={handleLeftClick}
       >
         <svg
@@ -50,7 +50,7 @@ const Allmovies: React.FC = () => {
         </svg>
       </div>
       <div
-        className={`absolute right-0 bottom-82 z-10 cursor-pointer bg-gradient-to-r from-[#00000088] from-100% to-transparent md:bottom-51 md:py-28 lg:bottom-21 lg:px-3 lg:py-43 ${currentIndex === 18 ? 'hidden' : ''}`}
+        className={`absolute right-0 bottom-232 z-10 cursor-pointer bg-gradient-to-r from-[#00000088] from-100% to-transparent md:bottom-51 md:py-28 lg:bottom-200 lg:px-3 lg:py-43 ${currentIndex === 18 ? 'hidden' : ''}`}
         onClick={handleRightClick}
       >
         <svg

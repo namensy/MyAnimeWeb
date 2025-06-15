@@ -32,12 +32,12 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setImageIndex((prev) => (prev === 3 ? 1 : prev + 1));
-  //   }, 10000);
-  //   return () => clearInterval(interval);
-  // }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndex((prev) => (prev === 3 ? 1 : prev + 1))
+    }, 10000)
+    return () => clearInterval(interval)
+  }, [])
 
   function extractAge(rating: string | undefined) {
     if (!rating) return 'N/A'

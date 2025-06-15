@@ -35,8 +35,11 @@ enum ErrorType {
 const controller = new AbortController()
 const signal = controller.signal
 
-export const useMultipleApi = (iknow: string, url: string) => {
-  const [data, setData] = useState<AnimeItems[]>([])
+export const useMultipleApi = <T = unknown>(
+  defaultPath: string,
+  path: string
+) => {
+  const [data, setData] = useState<T | null>(null)
   const [isLoading, setLoading] = useState<boolean>(false)
   const [isError, setIsError] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
@@ -59,20 +62,15 @@ export const useMultipleApi = (iknow: string, url: string) => {
     }
   }
 
-  // เราต้องการรับ Api ที่แตกต่างกันออกมา
-  // ฉนั้นเราต้องรับ arg เป็นทั้ง Api แล้วก็ baseURL ของ API ก่อน
-
-  // https://api.jikan.moe/v4/anime/9253/episodes
-  //ลองใช้งานดูก่อน
   const fetchApi = async () => {
     setLoading(true)
     try {
-      const endpoint = await axios.get(`${iknow}${url}`, { signal })
+      const endpoint = await axios.get(`${defaultPath}${path}`, { signal })
       // เราสามารถทำ Pagination ได้
       const {
         data: { data },
       } = endpoint
-      setData(data)
+      setData(data as T)
     } catch (error) {
       handleError(error)
     } finally {
@@ -82,7 +80,7 @@ export const useMultipleApi = (iknow: string, url: string) => {
 
   useEffect(() => {
     fetchApi()
-  }, [iknow, url])
+  }, [defaultPath, path])
 
   return {
     data,

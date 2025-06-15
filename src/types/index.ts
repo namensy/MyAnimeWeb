@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react'
 
 export interface SearchProps {
   searchTerm: string | string[]
-  setSearchTerm: Dispatch<SetStateAction<string | string[]>>;
+  setSearchTerm: Dispatch<SetStateAction<string | string[]>>
   loading: boolean
-  setLoading: Dispatch<SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>
 }
 
 export interface Root {
@@ -140,6 +140,20 @@ export interface Genre {
 }
 
 export interface Theme {
+  mal_id: number
+  type: string
+  name: string
+  url: string
+}
+
+// Compare this snippet from src/types/relatedTypes.ts:
+
+export interface Daum {
+  relation: string
+  entry: Entry[]
+}
+
+export interface Entry {
   mal_id: number
   type: string
   name: string
