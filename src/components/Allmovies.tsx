@@ -1,37 +1,121 @@
 import { v4 as uuid } from 'uuid'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAnimeApi } from '@/hooks/useAnimeApi'
 import { useAppContext } from '@/context/AppContext'
 import { formatSiUnit } from 'format-si-unit'
 import Loading from '@/components/Loading'
 import { Link } from 'react-router-dom'
+import { config } from 'process'
 
-const Allmovies: React.FC = () => {
+const Allmovies = () => {
   const { searchTerm, loading } = useAppContext()
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [windows, setWindows] = useState(0)
   const itemsPerPage = 6
   const cardWidth = 250 // px
   const { animeList } = useAnimeApi(searchTerm)
 
+  const configObject = [
+    { breakpoint: 640, step: 1.6, maxItemPage: 14 },
+    { breakpoint: 768, step: 1.8, maxItemPage: 14 },
+    { breakpoint: 1024, step: 3.47, maxItemPage: 15 },
+    { breakpoint: 1280, step: 4, maxItemPage: 9 },
+    { breakpoint: 1536, step: 5, maxItemPage: 10 },
+  ]
+
   const handleRightClick = () => {
-    const maxIndex = Math.max(0, animeList.length - itemsPerPage)
-    if (currentIndex < maxIndex) {
-      setCurrentIndex(currentIndex + itemsPerPage)
+    // 25 - 6 = 19 // 0 , 19 = 19
+
+    let stepToUse = 6
+    let itemsPerPage = 6
+
+    for (let i = 0; i < configObject.length; i++) {
+      if (window.innerWidth <= configObject[i].breakpoint) {
+        stepToUse = configObject[i].step
+        itemsPerPage = configObject[i].maxItemPage
+        console.log('maxItemPage', configObject[i].maxItemPage)
+        break
+      }
     }
+
+    const maxIndex = Math.max(0, animeList.length - itemsPerPage)
+    if (currentIndex >= maxIndex) return
+
+    console.log('itemsPerPage =>', itemsPerPage)
+
+    // เราจำเป็นต้องใช้ min หรอ
+    const newIndex = Math.min(currentIndex + stepToUse, maxIndex)
+    setCurrentIndex(newIndex)
+
+    // if (currentIndex < maxIndex) {
+    //   if (window.innerWidth <= (element.md as number)) {
+    //     if (currentIndex >= animeList.length - 14) {
+    //       setCurrentIndex(13.5)
+    //     } else {
+    //       setCurrentIndex(currentIndex + 1.8)
+    //     }
+    //   } else if (window.innerWidth <= 1024) {
+    //     if (currentIndex >= animeList.length - 15) {
+    //       setCurrentIndex(14)
+    //     } else {
+    //       setCurrentIndex(currentIndex + 3.47)
+    //     }
+    //   } else if (window.innerWidth <= 1280) {
+    //     if (currentIndex >= animeList.length - 9) {
+    //       setCurrentIndex(16)
+    //     } else {
+    //       setCurrentIndex(currentIndex + 4)
+    //     }
+    //   } else if (window.innerWidth >= 1281 && window.innerWidth < 1920) {
+    //     if (currentIndex >= animeList.length - 10) {
+    //       setCurrentIndex(20)
+    //     } else {
+    //       setCurrentIndex(currentIndex + 5)
+    //     }
+    //   } else if (window.innerWidth >= 1920) {
+    //     if (currentIndex >= animeList.length) {
+    //       setCurrentIndex(maxIndex)
+    //     } else {
+    //       setCurrentIndex(currentIndex + itemsPerPage)
+    //     }
+    //   }
+    // }
   }
 
   const handleLeftClick = () => {
     if (currentIndex - itemsPerPage >= 0) {
-      setCurrentIndex(currentIndex - itemsPerPage)
+      if (window.innerWidth <= 768) {
+        setCurrentIndex(currentIndex - 2)
+      } else if (window.innerWidth <= 1024) {
+        setCurrentIndex(currentIndex - 3.3)
+      } else if (window.innerWidth <= 1280) {
+        setCurrentIndex(currentIndex - 4)
+      } else if (window.innerWidth <= 1536) {
+        setCurrentIndex(currentIndex - 5)
+      } else if (window.innerWidth <= 1920) {
+        setCurrentIndex(currentIndex - itemsPerPage)
+      }
     } else {
       setCurrentIndex(0)
     }
   }
 
+  const handleResize = () => {
+    setWindows(window.innerWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  console.log(windows)
+
   return (
     <section className="relativ mt-11 h-[600px] w-full">
       <div
-        className={`absolute bottom-232 left-0 z-10 cursor-pointer bg-gradient-to-r from-[#00000088] from-100% to-transparent md:bottom-51 md:py-28 lg:bottom-200 lg:px-3 lg:py-43 ${currentIndex === 0 ? 'hidden' : ''}`}
+        className={`absolute bottom-232 left-0 z-10 cursor-pointer bg-gradient-to-l from-[#00000088] from-100% to-transparent md:bottom-195 md:py-28 lg:bottom-200 lg:px-3 lg:py-43 ${currentIndex === 0 ? 'hidden' : ''}`}
         onClick={handleLeftClick}
       >
         <svg
@@ -50,7 +134,7 @@ const Allmovies: React.FC = () => {
         </svg>
       </div>
       <div
-        className={`absolute right-0 bottom-232 z-10 cursor-pointer bg-gradient-to-r from-[#00000088] from-100% to-transparent md:bottom-51 md:py-28 lg:bottom-200 lg:px-3 lg:py-43 ${currentIndex === 18 ? 'hidden' : ''}`}
+        className={`absolute right-0 bottom-232 z-10 cursor-pointer bg-gradient-to-r from-[#00000088] from-100% to-transparent md:bottom-195 md:py-28 lg:bottom-200 lg:px-3 lg:py-43 ${currentIndex === 18 ? 'hidden' : ''}`}
         onClick={handleRightClick}
       >
         <svg

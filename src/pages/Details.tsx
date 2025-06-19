@@ -1,67 +1,24 @@
 import { useAnimeApi } from '@/hooks/useAnimeApi'
-import { useAnimeNewsApi } from '@/hooks/useAnimeNewsApi'
-import { useMultipleApi } from '@/hooks/useMultipleApi'
 import { formatSiUnit } from 'format-si-unit'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid'
-import { BASE_URL } from '@/constants/api'
-import { AnimeItems, Daum } from '@/types'
-import { CharacterItems } from '@/types/characterTypes'
 import Relations from '@/components/Relations'
+import Characters from '@/components/Characters'
+import Episodes from '@/components/Episodes'
+import Overview from '@/components/Overview'
 
 const Details = () => {
   const { id } = useParams()
   const { animeList } = useAnimeApi(id as string)
   const [activeTab, setActiveTab] = useState('overview')
   const [showVideo, setShowVideo] = useState(false)
-  const { animeNews } = useAnimeNewsApi(id as string)
-  const episodeUrl = `/anime/${id}/episodes`
-  const { data: dataEpisodes, errorMessage } = useMultipleApi<AnimeItems[]>(
-    BASE_URL,
-    episodeUrl
-  )
-  const charactersUrl = `/anime/${id}/characters`
-  const { data: dataCharacters } = useMultipleApi<CharacterItems[]>(
-    BASE_URL,
-    charactersUrl
-  )
+  const ref = useRef<HTMLButtonElement>(null)
 
-  const handleYear = (year: string) => {
-    const regex = /\b\d{4}\b/
-    const result = year.match(regex)
-    return result
-  }
-
-  const handleMonth = (month: string) => {
-    const allMonth = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ]
-    const regex = /\b\d{2}\b/
-    const monthResult = month.match(regex)?.toString()
-
-    if (monthResult) {
-      const monthIndex = Number(monthResult) - 1
-      const monthName = allMonth[monthIndex]
-      return monthName
+  const autoFocus = () => {
+    if (ref.current) {
+      ref.current.focus()
     }
-    return 'Unknown Month'
-  }
-
-  const handleDay = (day: string) => {
-    const result = day.match(/-(\d{2})T/)
-    return result ? result[1] : 'Unknow'
+    return
   }
 
   const handleChange = () => {
@@ -71,6 +28,15 @@ const Details = () => {
   useEffect(() => {
     handleChange()
   }, [activeTab])
+
+  useEffect(() => {
+    const FOCUS_DELAY = 100
+    const intervalFocus = setTimeout(() => {
+      autoFocus()
+    }, FOCUS_DELAY)
+
+    return () => clearTimeout(intervalFocus)
+  }, [])
 
   return (
     <main className="flex-grow">
@@ -446,9 +412,10 @@ const Details = () => {
                     <button
                       type="button"
                       role="tab"
-                      aria-selected="true"
+                      aria-selected={activeTab === 'overview'}
                       aria-controls="overview"
                       onClick={() => setActiveTab('overview')}
+                      ref={ref}
                       className="inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap focus:bg-[#020817]"
                     >
                       <svg
@@ -472,7 +439,7 @@ const Details = () => {
                     <button
                       type="button"
                       role="tab"
-                      aria-selected="false"
+                      aria-selected={activeTab === 'episodes'}
                       aria-controls="episodes"
                       onClick={() => setActiveTab('episodes')}
                       className="inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap focus:bg-[#020817]"
@@ -501,7 +468,7 @@ const Details = () => {
                     <button
                       type="button"
                       role="tab"
-                      aria-selected="false"
+                      aria-selected={activeTab === 'characters'}
                       aria-controls="characters"
                       onClick={() => setActiveTab('characters')}
                       className="inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap focus:bg-[#020817]"
@@ -528,7 +495,7 @@ const Details = () => {
                     <button
                       type="button"
                       role="tab"
-                      aria-selected="true"
+                      aria-selected={activeTab === 'related'}
                       aria-controls="related"
                       onClick={() => setActiveTab('related')}
                       className="inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap focus:bg-[#020817]"
@@ -556,231 +523,20 @@ const Details = () => {
                       Related
                     </button>
                   </div>
-                  <div
-                    data-state="active"
-                    data-orientation="horizontal"
-                    className={`w-full space-y-8 ${activeTab === 'overview' ? '' : 'hidden'}`}
-                  >
-                    <div>
-                      <h2 className="mb-4 flex items-center text-2xl font-bold">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="lucide lucide-play mr-2 h-5 w-5"
-                        >
-                          <polygon points="6 3 20 12 6 21 6 3"></polygon>
-                        </svg>
-                        Trailer
-                      </h2>
-                      <div>
-                        {showVideo && trailer.embed_url ? (
-                          <iframe
-                            title="trailer"
-                            width="100%"
-                            height="auto"
-                            src={trailer.embed_url}
-                            className="mx-auto aspect-video lg:max-w-7/12"
-                            allowFullScreen
-                          ></iframe>
-                        ) : (
-                          'Trailer not avaliable'
-                        )}
-                      </div>
-                    </div>
-                    <div>
-                      <h2 className="mb-4 flex items-center text-2xl font-bold">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="lucide lucide-info mr-2 h-5 w-5"
-                        >
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <path d="M12 16v-4"></path>
-                          <path d="M12 8h.01"></path>
-                        </svg>
-                        News
-                      </h2>
-                      <div className="grid grid-cols-1 gap-4">
-                        {animeNews &&
-                          animeNews.slice(0, 5).map((item) => (
-                            <div key={`mal_id_${uuidv4()}`}>
-                              <a
-                                href={item.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block rounded-lg border p-4 transition-all hover:shadow-md"
-                              >
-                                <h3 className="mb-2 text-lg font-bold">
-                                  {item.title}
-                                </h3>
-                                <div className="text-muted-foreground flex justify-between text-sm">
-                                  <span>
-                                    {handleMonth(item.date)}{' '}
-                                    {handleYear(item.date)}
-                                  </span>
-                                  <span>
-                                    {item.author_username
-                                      ? ` by ${item.author_username}`
-                                      : ''}
-                                  </span>
-                                </div>
-                                <p className="text-muted-foreground mt-2 line-clamp-2">
-                                  {item.excerpt}
-                                </p>
-                              </a>
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    data-state="inactive"
-                    data-orientation="horizontal"
-                    className={`w-full ${activeTab === 'episodes' ? '' : 'hidden'}`}
-                  >
-                    <h3 className="mb-6 flex items-center text-2xl font-bold">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-list mr-2 h-4 w-4"
-                      >
-                        <path d="M3 12h.01"></path>
-                        <path d="M3 18h.01"></path>
-                        <path d="M3 6h.01"></path>
-                        <path d="M8 12h13"></path>
-                        <path d="M8 18h13"></path>
-                        <path d="M8 6h13"></path>
-                      </svg>
-                      Episodes
-                    </h3>
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                      {dataEpisodes &&
-                        dataEpisodes.map((item) => (
-                          <div
-                            key={item.mal_id + uuidv4()}
-                            className='className="bg-card text-card-foreground hover:showdow-md transition-all" cursor-pointer overflow-hidden rounded-lg border shadow-sm'
-                          >
-                            <div className="p-4">
-                              <div className="mb-2 flex items-center justify-between">
-                                <div className="inline-flex items-center rounded-full border border-[#94a3b8] px-2.5 py-0.5 text-xs font-semibold transition-colors">
-                                  EP {item.mal_id}
-                                </div>
-                                <div className="flex gap-1"></div>
-                              </div>
-                              <h3 className="mb-2 line-clamp-2 text-sm font-bold">
-                                {item.title}
-                              </h3>
-                              <p className="text-muted-foreground flex items-center text-xs">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="24"
-                                  height="24"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  className="lucide lucide-calendar mr-1 h-3 w-3"
-                                >
-                                  <path d="M8 2v4"></path>
-                                  <path d="M16 2v4"></path>
-                                  <rect
-                                    width="18"
-                                    height="18"
-                                    x="3"
-                                    y="4"
-                                    rx="2"
-                                  ></rect>
-                                  <path d="M3 10h18"></path>
-                                </svg>
-                                {`${handleMonth(item.aired.toString())} ${handleDay(item.aired.toString())}, ${handleYear(item.aired.toString())}`}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                  <div
-                    data-state="inactive"
-                    data-orientation="horizontal"
-                    className={`w-full ${activeTab === 'characters' ? '' : 'hidden'}`}
-                  >
-                    <div>
-                      <h2 className="mb-6 flex items-center text-2xl font-bold">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="lucide lucide-users mr-2 h-5 w-5"
-                        >
-                          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                          <circle cx="9" cy="7" r="4"></circle>
-                          <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                        Characters
-                      </h2>
-                      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                        {dataCharacters &&
-                          dataCharacters.map((item) => (
-                            <div
-                              key={uuidv4()}
-                              className="bg-card text-card-foreground hover:shadow:md overflow-hidden rounded-lg border shadow-sm transition-all"
-                            >
-                              <div className="flex p-4">
-                                <div className="relative h-24 w-16">
-                                  <img
-                                    src={item.character.images.webp.image_url}
-                                    alt=""
-                                    loading="lazy"
-                                    decoding="async"
-                                    className="absolute inset-0 h-full w-full rounded-md object-cover text-transparent"
-                                  />
-                                </div>
-                                <div className="ml-4 flex-grow">
-                                  {item.character.name}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                  </div>
+                  <Overview
+                    activeTab={activeTab}
+                    showVideo={showVideo}
+                    trailer={trailer}
+                  />
+                  <Episodes activeTab={activeTab} />
+                  <Characters activeTab={activeTab} />
                   <Relations activeTab={activeTab} />
                 </div>
               </div>
             )
           )
         ) : (
-          <div>{errorMessage}</div>
+          <div>Error Message</div>
         )}
       </div>
     </main>
