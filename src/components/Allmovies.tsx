@@ -5,10 +5,9 @@ import { useAppContext } from '@/context/AppContext'
 import { formatSiUnit } from 'format-si-unit'
 import Loading from '@/components/Loading'
 import { Link } from 'react-router-dom'
-import { config } from 'process'
 
 const Allmovies = () => {
-  const { searchTerm, loading } = useAppContext()
+  const { searchTerm, loading, addBookmark } = useAppContext()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [windows, setWindows] = useState(0)
   const itemsPerPage = 6
@@ -110,8 +109,6 @@ const Allmovies = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  console.log(windows)
-
   return (
     <section className="relativ mt-11 h-[600px] w-full">
       <div
@@ -168,77 +165,86 @@ const Allmovies = () => {
               <Loading />
             ) : (
               animeList?.map((items) => (
-                <Link
-                  key={`${items.mal_id}-${uuid()}`}
-                  to={`/watch/${items.mal_id}`}
-                  className="relative mt-5 h-auto w-full rounded-sm"
-                >
-                  <div className="hover:bg-opacity-75 aspect-[2/3] w-full transition-all duration-300 ease-in-out">
-                    <img
-                      src={items.images.webp.image_url}
-                      alt="image"
-                      decoding="async"
-                      loading="lazy"
-                      className="mx-auto block h-full w-full rounded-sm object-cover"
-                    />
-                  </div>
-                  <p className="mt-2 line-clamp-1 w-full text-sm whitespace-normal text-white">
-                    {items.title}
-                  </p>
-                  <p className="text-sm text-[#9d9d9d]">
-                    {items.year ? items.year : 'No-info'}
-                  </p>
-                  <div className="absolute top-2 right-0 h-full w-full p-1 opacity-0 transition-opacity duration-100 hover:scale-105 hover:bg-[#17161c] hover:opacity-95">
-                    <div className="m-2 line-clamp-10 text-sm whitespace-normal text-white select-none md:line-clamp-8 lg:line-clamp-6">
-                      <p className="mb-2 text-nowrap">{items.title}</p>
-                      <p className="text-[#9d9d9d]">{`${items.score} ★ (${formatSiUnit(items.scored_by)})`}</p>
-                      <p className="text-[#9d9d9d]">{`${items.episodes} episodes`}</p>
-                      <p className="mt-2 line-clamp-4">{items.synopsis}</p>
+                <div className="relative mt-5 h-auto w-full rounded-sm">
+                  <Link to={`/watch/${items.mal_id}`}>
+                    <div
+                      key={`${items.mal_id}-${uuid()}`}
+                      className="hover:bg-opacity-75 aspect-[2/3] w-full transition-all duration-300 ease-in-out"
+                    >
+                      <img
+                        src={items.images.webp.image_url}
+                        alt="image"
+                        decoding="async"
+                        loading="lazy"
+                        className="mx-auto block h-full w-full rounded-sm object-cover"
+                      />
                     </div>
-                    <div className="absolute bottom-4 left-4 mb-4 flex gap-2">
-                      <div className="group relative">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="lucide lucide-play mr-2 h-5 w-5 text-xl text-orange-500"
-                        >
-                          <polygon points="6 3 20 12 6 21 6 3"></polygon>
-                        </svg>
-                        <span className="lg:text-default absolute left-2 -translate-x-1/2 -translate-y-4/2 transform rounded bg-[#535364] px-4 py-3 text-sm text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                          Play
-                          <span className="absolute left-1/2 h-2 w-2 -translate-x-1/2 translate-y-7 rotate-45 transform bg-[#535364] lg:h-4 lg:w-4 lg:translate-y-6" />
-                        </span>
+                    <p className="mt-2 line-clamp-1 w-full text-sm whitespace-normal text-white">
+                      {items.title}
+                    </p>
+                    <p className="text-sm text-[#9d9d9d]">
+                      {items.year ? items.year : 'No-info'}
+                    </p>
+                    <div className="absolute top-2 right-0 h-full w-full p-1 opacity-0 transition-opacity duration-100 hover:scale-105 hover:bg-[#17161c] hover:opacity-95">
+                      <div className="m-2 line-clamp-10 text-sm whitespace-normal text-white select-none md:line-clamp-8 lg:line-clamp-6">
+                        <p className="mb-2 text-nowrap">{items.title}</p>
+                        <p className="text-[#9d9d9d]">{`${items.score} ★ (${formatSiUnit(items.scored_by)})`}</p>
+                        <p className="text-[#9d9d9d]">{`${items.episodes} episodes`}</p>
+                        <p className="mt-2 line-clamp-4">{items.synopsis}</p>
                       </div>
-                      <div className="group relative">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="lucide lucide-bookmark h-5 w-5 text-xl text-orange-500"
-                        >
-                          <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
-                        </svg>
-                        <span className="lg:text-default absolute left-1/2 -translate-x-1/2 -translate-y-4/2 transform rounded bg-[#535364] px-4 py-3 text-sm text-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                          Add to Watchlist
-                          <span className="absolute left-1/2 h-2 w-2 -translate-x-1/2 translate-y-7 rotate-45 transform bg-[#535364] lg:h-4 lg:w-4 lg:translate-y-6" />
-                        </span>
+                      <div className="absolute bottom-4 left-4 mb-4 flex gap-2">
+                        <div className="group relative">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-play mr-2 h-5 w-5 text-xl text-orange-500"
+                          >
+                            <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                          </svg>
+                          <span className="lg:text-default absolute left-2 -translate-x-1/2 -translate-y-4/2 transform rounded bg-[#535364] px-4 py-3 text-sm text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                            Play
+                            <span className="absolute left-1/2 h-2 w-2 -translate-x-1/2 translate-y-7 rotate-45 transform bg-[#535364] lg:h-4 lg:w-4 lg:translate-y-6" />
+                          </span>
+                        </div>
+                        <div className="group relative">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              addBookmark(items.mal_id, items.title)
+                            }}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="lucide lucide-bookmark h-5 w-5 text-xl text-orange-500"
+                            >
+                              <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+                            </svg>
+                          </button>
+                          <span className="lg:text-default absolute left-1/2 -translate-x-1/2 -translate-y-4/2 transform rounded bg-[#535364] px-4 py-3 text-sm text-nowrap text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                            Add to Watchlist
+                            <span className="absolute left-1/2 h-2 w-2 -translate-x-1/2 translate-y-7 rotate-45 transform bg-[#535364] lg:h-4 lg:w-4 lg:translate-y-6" />
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               ))
             )}
           </div>

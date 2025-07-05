@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/context/AppContext";
-import { log } from "console";
 
 interface AnimeNewsItem {
   mal_id: number;

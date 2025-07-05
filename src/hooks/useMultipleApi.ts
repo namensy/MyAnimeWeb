@@ -1,5 +1,3 @@
-import { AnimeItems, Root } from '@/types'
-import { fail } from 'assert'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 

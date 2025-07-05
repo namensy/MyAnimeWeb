@@ -5,6 +5,14 @@ export interface SearchProps {
   setSearchTerm: Dispatch<SetStateAction<string | string[]>>
   loading: boolean
   setLoading: Dispatch<SetStateAction<boolean>>
+  addBookmark: (animeId: number, animeTitle: string) => {}
+  bookmarks: Bookmarks[]
+}
+
+export interface Bookmarks {
+  firebaseId: string
+  id: number
+  title: string
 }
 
 export interface Root {
