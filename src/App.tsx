@@ -7,6 +7,7 @@ import Search from './pages/Search'
 import Details from './pages/Details'
 import Footer from './components/Footer'
 import Home from './pages/Home'
+import Bookmarks from './pages/Bookmarks'
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
         <Route path="/videos/new" element={<New />} />
         <Route path="/videos/popular" element={<Popular />} />
         <Route path="/videos/search" element={<Search />} />

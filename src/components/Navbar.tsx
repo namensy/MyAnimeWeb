@@ -50,7 +50,10 @@ const Navbar: React.FC = () => {
       <div className="mr-10 hidden text-white transition-transform lg:block">
         {user ? (
           <div className="flex h-full w-full items-center gap-4">
-            <div className="cursor-pointer p-5.5 transition-transform hover:-translate-y-0 hover:bg-[#141519]">
+            <div
+              className="cursor-pointer p-5.5 transition-transform hover:-translate-y-0 hover:bg-[#141519]"
+              onClick={() => navigate('bookmarks')}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -109,9 +112,7 @@ const Navbar: React.FC = () => {
           <div className="mr-10 flex items-center gap-4">
             {user ? (
               <>
-                <button
-                  type="button"
-                >
+                <button type="button">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"

@@ -165,12 +165,12 @@ const Allmovies = () => {
               <Loading />
             ) : (
               animeList?.map((items) => (
-                <div className="relative mt-5 h-auto w-full rounded-sm">
+                <div
+                  key={items.mal_id}
+                  className="relative mt-5 h-auto w-full rounded-sm"
+                >
                   <Link to={`/watch/${items.mal_id}`}>
-                    <div
-                      key={`${items.mal_id}-${uuid()}`}
-                      className="hover:bg-opacity-75 aspect-[2/3] w-full transition-all duration-300 ease-in-out"
-                    >
+                    <div className="hover:bg-opacity-75 aspect-[2/3] w-full transition-all duration-300 ease-in-out">
                       <img
                         src={items.images.webp.image_url}
                         alt="image"
@@ -218,7 +218,11 @@ const Allmovies = () => {
                             type="button"
                             onClick={(e) => {
                               e.preventDefault()
-                              addBookmark(items.mal_id, items.title)
+                              addBookmark(
+                                items.mal_id,
+                                items.title,
+                                items.images.webp.image_url
+                              )
                             }}
                           >
                             <svg
