@@ -4,9 +4,11 @@ import { useAppContext } from '@/context/AppContext'
 import { v4 as uuidv4 } from 'uuid'
 import Loading from '@/components/Loading'
 import { Link } from 'react-router-dom'
+import { useSearchContext } from '@/context/SearchContext'
 
 const New: React.FC = () => {
-  const { searchTerm, loading } = useAppContext()
+  const { loading, searchTerm } = useAppContext()
+  // const { searchTerm } = useSearchContext()
   const { animeList } = useAnimeApi(searchTerm)
 
   return (

@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { ClerkProvider } from '@clerk/clerk-react'
-import { BrowserRouter } from 'react-router-dom'
 import { AppProvider } from './context/AppContext.js'
+import { SearchProvider } from './context/SearchContext.js'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -15,11 +15,11 @@ if (!PUBLISHABLE_KEY) {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-      <AppProvider>
-        <BrowserRouter>
+      <SearchProvider>
+        <AppProvider>
           <App />
-        </BrowserRouter>
-      </AppProvider>
+        </AppProvider>
+      </SearchProvider>
     </ClerkProvider>
   </StrictMode>
 )

@@ -5,9 +5,11 @@ import { useAppContext } from '@/context/AppContext'
 import { formatSiUnit } from 'format-si-unit'
 import Loading from '@/components/Loading'
 import { Link } from 'react-router-dom'
+import { useSearchContext } from '@/context/SearchContext'
 
 const Allmovies = () => {
-  const { searchTerm, loading, addBookmark } = useAppContext()
+  const { loading, addBookmark, searchTerm } = useAppContext()
+  // const { searchTerm } = useSearchContext()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [windows, setWindows] = useState(0)
   const itemsPerPage = 6
@@ -39,8 +41,6 @@ const Allmovies = () => {
 
     const maxIndex = Math.max(0, animeList.length - itemsPerPage)
     if (currentIndex >= maxIndex) return
-
-    console.log('itemsPerPage =>', itemsPerPage)
 
     // เราจำเป็นต้องใช้ min หรอ
     const newIndex = Math.min(currentIndex + stepToUse, maxIndex)

@@ -4,6 +4,8 @@ import {
   ReactNode,
   useState,
   useEffect,
+  useMemo,
+  useCallback,
 } from 'react'
 import { Bookmarks, SearchProps } from '../types'
 import { initializeApp } from 'firebase/app'
@@ -14,6 +16,19 @@ import {
   getFirestore,
   query,
 } from 'firebase/firestore'
+
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+}
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig)
+const firestore = getFirestore(app)
 
 export const AppContext = createContext<SearchProps>({
   searchTerm: '',
@@ -27,21 +42,9 @@ export const AppContext = createContext<SearchProps>({
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [searchTerm, setSearchTerm] = useState<string | string[]>([])
   const [loading, setLoading] = useState(false)
-
   const [bookmarks, setBookmarks] = useState<Bookmarks[]>([])
 
-  const firebaseConfig = {
-    apiKey: import.meta.env.VITE_API_KEY,
-    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_APP_ID,
-  }
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig)
-  const firestore = getFirestore(app)
+  console.log('AppProvider re-rendered!')
 
   useEffect(() => {
     const getBookmark = async () => {
@@ -60,7 +63,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
             ...(doc.data() as { id: number; title: string; image: string }),
           })
         })
-        console.log(bookmarksList)
 
         setBookmarks(bookmarksList)
         /*  1. Collection = โฟลเดอร์ในคอมพิวเตอร์
@@ -77,57 +79,57 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     getBookmark()
   }, [])
 
-  const addBookmark = async (
-    animeId: number,
-    animeTitle: string,
-    animeImage: string
-  ) => {
-    const tempId = `temp-${Date.now()}`
-    const newBookmark: Bookmarks = {
-      firebaseId: tempId,
-      id: animeId,
-      title: animeTitle,
-      image: animeImage,
-    }
-
-    try {
-      setBookmarks((prevBookmarks) => [...prevBookmarks, newBookmark])
-
-      const docRef = await addDoc(collection(firestore, 'user-bookmarks'), {
+  const addBookmark = useCallback(
+    async (animeId: number, animeTitle: string, animeImage: string) => {
+      const tempId = `temp-${Date.now()}`
+      const newBookmark: Bookmarks = {
+        firebaseId: tempId,
         id: animeId,
         title: animeTitle,
         image: animeImage,
-      })
+      }
 
-      setBookmarks((prevBookmarks) =>
-        prevBookmarks.map((bookmark) =>
-          bookmark.firebaseId === tempId
-            ? { ...bookmark, firebaseId: docRef.id }
-            : bookmark
+      try {
+        setBookmarks((prevBookmarks) => [...prevBookmarks, newBookmark])
+
+        const docRef = await addDoc(collection(firestore, 'user-bookmarks'), {
+          id: animeId,
+          title: animeTitle,
+          image: animeImage,
+        })
+
+        setBookmarks((prevBookmarks) =>
+          prevBookmarks.map((bookmark) =>
+            bookmark.firebaseId === tempId
+              ? { ...bookmark, firebaseId: docRef.id }
+              : bookmark
+          )
         )
-      )
 
-      console.log('Document writtend with ID: ', docRef.id)
-    } catch (error) {
-      setBookmarks((prevBookmarks) =>
-        prevBookmarks.filter((bookmark) => bookmark.firebaseId !== tempId)
-      )
-    }
-  }
+        console.log('Document writtend with ID: ', docRef.id)
+      } catch (error) {
+        setBookmarks((prevBookmarks) =>
+          prevBookmarks.filter((bookmark) => bookmark.firebaseId !== tempId)
+        )
+      }
+    },
+    []
+  )
+
+  const contextValue = useMemo(
+    () => ({
+      searchTerm,
+      setSearchTerm,
+      loading,
+      setLoading,
+      addBookmark,
+      bookmarks,
+    }),
+    [searchTerm, loading, bookmarks, addBookmark]
+  )
 
   return (
-    <AppContext.Provider
-      value={{
-        searchTerm,
-        setSearchTerm,
-        loading,
-        setLoading,
-        addBookmark,
-        bookmarks,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   )
 }
 

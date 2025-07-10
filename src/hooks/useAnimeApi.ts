@@ -3,21 +3,23 @@ import { useState, useEffect } from 'react'
 import { useDebounce } from 'use-debounce'
 import { AnimeItems } from '@/types'
 import { useAppContext } from '@/context/AppContext'
-import { useMatch, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 export const useAnimeApi = (searchTerm: string | string[]) => {
-  const isMainRoute = useMatch('/')
-  const isNewRoute = useMatch('/videos/new')
-  const isPopularRoute = useMatch('/videos/popular')
-  const isSearchRoute = useMatch('/videos/search')
-  const isDetailsRoute = useMatch('/watch/:id')
+  const location = useLocation()
   const { id } = useParams()
+
+  const isMainRoute = location.pathname === '/'
+  const isNewRoute = location.pathname === '/videos/new'
+  const isPopularRoute = location.pathname === '/videos/popular'
+  const isSearchRoute = location.pathname === '/videos/search'
+  const isDetailsRoute = location.pathname.startsWith('/watch/')
 
   const { setLoading, loading } = useAppContext()
   const [animeList, setAnimeList] = useState<AnimeItems[]>([])
   const [debouncedText] = useDebounce(
     typeof searchTerm === 'string' ? searchTerm : '',
-    300
+    500
   )
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -67,7 +69,7 @@ export const useAnimeApi = (searchTerm: string | string[]) => {
 
   useEffect(() => {
     getMovieApi()
-  }, [debouncedText, id])
+  }, [debouncedText, ...(isDetailsRoute ? [id] : [])])
 
   return {
     animeList,
