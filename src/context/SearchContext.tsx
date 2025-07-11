@@ -19,7 +19,6 @@ export const SearchContext = createContext<SearchContextType>({
 
 export const SearchProvider = ({ children }: { children: ReactNode }) => {
   const [searchTerm, setSearchTerm] = useState<string | string[]>('')
-  console.log('SearchProvider re-rendered!')
 
   return (
     <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>

@@ -8,7 +8,8 @@ import { useAppContext } from '@/context/AppContext'
 const Navbar: React.FC = () => {
   const { openSignIn } = useClerk()
   const { user } = useUser()
-  const { searchTerm, setSearchTerm } = useAppContext()
+  const { searchTerm, setSearchTerm } = useSearchContext()
+  const { bookmarks } = useAppContext()
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
 
@@ -51,9 +52,10 @@ const Navbar: React.FC = () => {
       <div className="mr-10 hidden text-white transition-transform lg:block">
         {user ? (
           <div className="flex h-full w-full items-center gap-4">
-            <div
-              className="cursor-pointer p-5.5 transition-transform hover:-translate-y-0 hover:bg-[#141519]"
-              onClick={() => navigate('bookmarks')}
+            <Link
+              aria-label="View bookmarks"
+              to="/bookmarks"
+              className="relative cursor-pointer p-5.5 transition-transform hover:-translate-y-0 hover:bg-[#141519]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +71,10 @@ const Navbar: React.FC = () => {
               >
                 <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
               </svg>
-            </div>
+              <div className="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-sm">
+                <span>{bookmarks.length}</span>
+              </div>
+            </Link>
             <UserButton />
           </div>
         ) : (
@@ -82,7 +87,8 @@ const Navbar: React.FC = () => {
           </button>
         )}
       </div>
-      {/* {For phone} */}
+
+      {/* {For moblie} */}
       <div className="w-full lg:hidden">
         <div className="m-[8.5px] flex h-full w-full items-center justify-between pl-4">
           <div className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
@@ -110,10 +116,13 @@ const Navbar: React.FC = () => {
               className="ml-2 w-12 object-contain p-2"
             />
           </Link>
-          <div className="mr-10 flex items-center gap-4">
+          <div className="relative mr-10 flex items-center gap-4">
             {user ? (
               <>
-                <button type="button">
+                <div className="absolute -top-1 right-9 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-xs">
+                  <span>{bookmarks.length}</span>
+                </div>
+                <Link to="/bookmarks" aria-label="View bookmarks">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -128,11 +137,17 @@ const Navbar: React.FC = () => {
                   >
                     <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
                   </svg>
-                </button>
+                </Link>
+
                 <UserButton />
               </>
             ) : (
-              <button onClick={() => openSignIn()} className="gap-3">
+              <button
+                type="button"
+                title="Sign In"
+                onClick={() => openSignIn()}
+                className="gap-3"
+              >
                 Create Account
               </button>
             )}
