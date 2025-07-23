@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAnimeApi } from '@/hooks/useAnimeApi'
 import { useAppContext } from '@/context/AppContext'
 import { v4 as uuidv4 } from 'uuid'
@@ -8,8 +8,8 @@ import Error from '@/components/Error'
 import { useSearchContext } from '@/context/SearchContext'
 
 const New: React.FC = () => {
-  const { loading, searchTerm } = useAppContext()
-  // const { searchTerm } = useSearchContext()
+  const { loading } = useAppContext()
+  const { searchTerm } = useSearchContext()
   const { animeList, isError } = useAnimeApi(searchTerm)
 
   return (

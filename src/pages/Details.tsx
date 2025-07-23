@@ -6,6 +6,7 @@ import Relations from '@/components/Relations'
 import Characters from '@/components/Characters'
 import Episodes from '@/components/Episodes'
 import Overview from '@/components/Overview'
+import { useAnimeIdApi } from '@/hooks/useAnimeIdApi'
 
 const Details = () => {
   const { id } = useParams()

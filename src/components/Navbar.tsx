@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
           className="inline-block cursor-pointer px-5 hover:bg-[#141519] hover:text-white"
         >
           <img
-            className="w-16 cursor-pointer"
+            className="h-16 w-16 cursor-pointer"
             src={logos.anivibe}
             alt="AniVibe logo"
           />
