@@ -44,8 +44,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false)
   const [bookmarks, setBookmarks] = useState<Bookmarks[]>([])
 
-  console.log('AppProvider re-rendered!')
-
   useEffect(() => {
     const getBookmark = async () => {
       try {
@@ -105,8 +103,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
               : bookmark
           )
         )
-
-        console.log('Document writtend with ID: ', docRef.id)
       } catch (error) {
         setBookmarks((prevBookmarks) =>
           prevBookmarks.filter((bookmark) => bookmark.firebaseId !== tempId)

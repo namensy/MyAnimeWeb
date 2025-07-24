@@ -13,13 +13,13 @@ if (!PUBLISHABLE_KEY) {
 }
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-      <SearchProvider>
-        <AppProvider>
-          <App />
-        </AppProvider>
-      </SearchProvider>
-    </ClerkProvider>
-  </StrictMode>
+  // <StrictMode>
+  <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+    <SearchProvider>
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </SearchProvider>
+  </ClerkProvider>
+  // </StrictMode>
 )
